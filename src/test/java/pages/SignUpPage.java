@@ -10,11 +10,9 @@ import java.time.Duration;
 
 public class SignUpPage extends BasePage {
 
-
     public SignUpPage(WebDriver driver) {
         super(driver);
     }
-
 
     public SendLetterPage registrationByEmail(String email, String name) {
         SignUpSteps.enterEmail(driver, email);

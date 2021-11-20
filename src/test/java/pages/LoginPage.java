@@ -31,7 +31,7 @@ public class LoginPage extends BasePage {
             try {
                 new WebDriverWait(driver, Duration.ofSeconds(8)).until(ExpectedConditions.visibilityOfElementLocated(PASSWORD_ERROR));
                 return driver.findElement(PASSWORD_ERROR).getText();
-            } catch (NoSuchElementException elEx) {
+            } catch (Exception elEx) {
                 Assert.fail("No such element or page didn't load : " + PASSWORD_ERROR);
                 return null;
             }
