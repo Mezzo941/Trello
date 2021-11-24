@@ -1,10 +1,9 @@
 package tests;
 
+import com.sun.org.glassfish.gmbal.Description;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-
-import java.io.IOException;
 
 public class LoginPageTest extends BaseTest {
 
@@ -27,13 +26,35 @@ public class LoginPageTest extends BaseTest {
                 };
     }
 
-    @Test(dataProvider = "user")
-    public void negativeLoginTest(String email, String password, String error) throws IOException {
-        homePage.
-                open().
-                logIn().
-                authorization(email, password);
-            Assert.assertEquals(loginPage.getError(), error);
+    @Description("Negative login test with using invalid data")
+    @Test(dataProvider = "user", priority = 2)
+    public void negativeLoginTest(String email, String password, String error) {
+        Assert.assertTrue(
+                homePage
+                        .open()
+                        .isOpened()
+        );
+        homePage.logIn();
+        Assert.assertTrue(loginPage.isOpened());
+        loginSteps.negativeAuthorization(email, password);
+        Assert.assertEquals(loginPage.getError(), error);
     }
+
+    @Description("Positive login test with using valid data")
+    @Test(priority = 1)
+    public void positiveLoginTest() {
+        Assert.assertTrue(
+                homePage
+                        .open()
+                        .isOpened()
+        );
+        homePage.logIn();
+        Assert.assertTrue(loginPage.isOpened());
+        loginSteps.positiveAuthorization(EMAIL);
+        Assert.assertTrue(atlassianLoginPage.isOpened());
+        atlassianLoginSteps.atlassianLogin(PASS);
+        Assert.assertTrue(boardsPage.isOpened());
+    }
+
 
 }

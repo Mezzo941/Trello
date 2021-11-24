@@ -17,57 +17,61 @@ import java.util.List;
 public class ScreenshotFactory {
 
     private static final String BASE_DIRECTORY_PATH = PropertyReader.getProperty("trello.screen.path");
-    private static File directory = new File(BASE_DIRECTORY_PATH);
+    private static final File BASE_DIRECTORY = new File(BASE_DIRECTORY_PATH);
+    private static File screenDirectory;
 
-    public static void deleteScreenDir() throws IOException {
-        directory = new File(BASE_DIRECTORY_PATH);
-        if (directory.exists()) {
-            if (directory.isDirectory()) {
-                FileUtils.deleteDirectory(directory);
-            }
-        }
-    }
-
-    private static File createScreenDir() {
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
-        return directory;
-    }
-
-    private static List<File> getFilesFromDir() {
-        List<File> files = new ArrayList<>();
+    public static void createScreenshot(WebDriver driver, String dirName, ITestResult test) {
         try {
-            for (File file : directory.listFiles()) {
-                if (file.exists())
-                    files.add(file);
-            }
-        } catch (NullPointerException e) {
-            return null;
-        }
-        return files;
-    }
-
-    public static void createScreenshot(WebDriver driver, ITestResult test) throws IOException {
-        createScreenDir();
-        File screenshot;
-        List<File> files = getFilesFromDir();
-        try {
-            screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            createScreenDir(dirName);
+            List<File> files = getFilesFromDir();
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             try {
                 if (files != null) {
-                    FileUtils.copyFile(screenshot, new File(BASE_DIRECTORY_PATH, (String.format("%s%s.png", test.getName(), files.size()))));
+                    FileUtils.copyFile(screenshot, new File(screenDirectory.getPath(), (String.format("%s%s.png", test.getName(), files.size()))));
                 } else {
-                    FileUtils.copyFile(screenshot, new File(BASE_DIRECTORY_PATH, (String.format("%s%s.png", test.getName(), 0))));
+                    FileUtils.copyFile(screenshot, new File(screenDirectory.getPath(), (String.format("%s%s.png", test.getName(), 0))));
                 }
-                log.error("Screenshots path: " + BASE_DIRECTORY_PATH);
+                log.info("Screenshots path: " + screenDirectory);
             } catch (IOException e1) {
                 log.error("File named 'screenshots' already exists");
             }
         } catch (NullPointerException e2) {
             log.error("driver is null");
         }
+    }
 
+    private static void createScreenDir(String screenDirectoryPath) {
+        screenDirectoryPath = BASE_DIRECTORY_PATH + screenDirectoryPath;
+        if (!BASE_DIRECTORY.exists() || (BASE_DIRECTORY.exists() && !new File(screenDirectoryPath).exists())) {
+            screenDirectory = new File(screenDirectoryPath);
+            screenDirectory.mkdirs();
+        } else screenDirectory = new File(screenDirectoryPath);
+    }
+
+    public static void deleteScreenDir() throws IOException {
+        if (BASE_DIRECTORY.exists()) {
+            if (BASE_DIRECTORY.isDirectory()) {
+                FileUtils.deleteDirectory(BASE_DIRECTORY);
+            }
+        }
+    }
+
+    private static List<File> getFilesFromDir() {
+        List<File> files = new ArrayList<>();
+        try {
+            if (screenDirectory.listFiles() != null) {
+                for (File file : screenDirectory.listFiles()) {
+                    if (file.exists())
+                        files.add(file);
+                }
+            }
+            else {
+                return null;
+            }
+        } catch (NullPointerException e) {
+            log.info("directory is empty");
+        }
+        return files;
     }
 
 
