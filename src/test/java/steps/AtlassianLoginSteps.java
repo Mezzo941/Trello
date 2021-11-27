@@ -9,7 +9,7 @@ public class AtlassianLoginSteps extends BaseSteps{
         super(driver);
     }
 
-    public void atlassianLogin(String pass){
+    public void login(String pass){
         atlassianLoginPage.inputPassword(pass);
         atlassianLoginPage.clickLoginButton();
     }

@@ -1,4 +1,4 @@
-package factory;
+package utils;
 
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.io.FileUtils;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Log4j2
-public class ScreenshotFactory {
+public class ScreenshotUtils {
 
     private static final String BASE_DIRECTORY_PATH = PropertyReader.getProperty("trello.screen.path");
     private static final File BASE_DIRECTORY = new File(BASE_DIRECTORY_PATH);
@@ -69,7 +69,7 @@ public class ScreenshotFactory {
                 return null;
             }
         } catch (NullPointerException e) {
-            log.info("directory is empty");
+            log.info("Screenshot directory path not defined ");
         }
         return files;
     }

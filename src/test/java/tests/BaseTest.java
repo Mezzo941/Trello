@@ -1,6 +1,7 @@
 package tests;
 
-import factory.ScreenshotFactory;
+import steps.TrelloAreaSteps;
+import utils.ScreenshotUtils;
 import factory.WebDriverFactory;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
@@ -27,20 +28,21 @@ public class BaseTest {
     protected SendLetterPage sendLetterPage;
     protected LoginPage loginPage;
     protected AtlassianLoginPage atlassianLoginPage;
-    protected BoardsPage boardsPage;
+    protected TrelloAreaPage trelloAreaPage;
 
     protected LoginSteps loginSteps;
     protected AtlassianLoginSteps atlassianLoginSteps;
+    protected TrelloAreaSteps trelloAreaSteps;
 
     @BeforeSuite
     public void deleteScreenDir() throws IOException {
-        ScreenshotFactory.deleteScreenDir();
+        ScreenshotUtils.deleteScreenDir();
     }
 
     @BeforeMethod
     public void setUp(ITestContext context) {
         try {
-            driver = WebDriverFactory.gerDriver("chrome","headless");
+            driver = WebDriverFactory.gerDriver("chrome", "start-maximized");
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             context.setAttribute("driver", driver);
         } catch (NullPointerException e) {
@@ -54,7 +56,8 @@ public class BaseTest {
         loginSteps = new LoginSteps(driver);
         atlassianLoginPage = new AtlassianLoginPage(driver);
         atlassianLoginSteps = new AtlassianLoginSteps(driver);
-        boardsPage = new BoardsPage(driver);
+        trelloAreaPage = new TrelloAreaPage(driver);
+        trelloAreaSteps = new TrelloAreaSteps(driver);
     }
 
     @AfterMethod(alwaysRun = true)

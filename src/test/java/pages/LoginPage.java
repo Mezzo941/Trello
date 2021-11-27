@@ -25,23 +25,23 @@ public class LoginPage extends BasePage {
 
     @Description("Login trello page is opened")
     public boolean isOpened() {
-        boolean status = super.isOpened(TITLE,TITLE_PATH);
+        boolean status = super.isOpened(TITLE, TITLE_PATH);
         if (status) {
             log.info("Login page is opened");
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
     public String getError() {
-        log.info("get error after bad login ");
         try {
+            log.info("get error after bad login. Error details: " + ERROR);
             new WebDriverWait(driver, Duration.ofSeconds(8)).until(ExpectedConditions.visibilityOfElementLocated(ERROR));
             return driver.findElement(ERROR).getText();
         } catch (TimeoutException e1) {
             try {
+                log.info("get error after bad login. Error details: " + PASSWORD_ERROR);
                 new WebDriverWait(driver, Duration.ofSeconds(8)).until(ExpectedConditions.visibilityOfElementLocated(PASSWORD_ERROR));
                 return driver.findElement(PASSWORD_ERROR).getText();
             } catch (TimeoutException e2) {

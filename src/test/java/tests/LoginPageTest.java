@@ -8,8 +8,8 @@ import org.testng.annotations.Test;
 public class LoginPageTest extends BaseTest {
 
 
-    @DataProvider(name = "user")
-    public Object[][] getUser() {
+    @DataProvider(name = "userData")
+    public Object[][] getData() {
         return new Object[][]
                 {
                         {"email@gmail.com", "eeeeeeee", "Указан неверный адрес и/или пароль. Нужна помощь?"},
@@ -27,7 +27,7 @@ public class LoginPageTest extends BaseTest {
     }
 
     @Description("Negative login test with using invalid data")
-    @Test(dataProvider = "user", priority = 2)
+    @Test(dataProvider = "userData", priority = 2)
     public void negativeLoginTest(String email, String password, String error) {
         Assert.assertTrue(
                 homePage
@@ -52,8 +52,8 @@ public class LoginPageTest extends BaseTest {
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL);
         Assert.assertTrue(atlassianLoginPage.isOpened());
-        atlassianLoginSteps.atlassianLogin(PASS);
-        Assert.assertTrue(boardsPage.isOpened());
+        atlassianLoginSteps.login(PASS);
+        Assert.assertTrue(trelloAreaPage.isOpened());
     }
 
 

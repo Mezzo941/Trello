@@ -1,6 +1,5 @@
 package utils;
 
-import factory.ScreenshotFactory;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestListener;
@@ -22,7 +21,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
         WebDriver driver = (WebDriver) iTestResult.getTestContext().getAttribute("driver");
-        ScreenshotFactory.createScreenshot(driver, iTestResult.getTestClass().getName(), iTestResult);
+        ScreenshotUtils.createScreenshot(driver, iTestResult.getTestClass().getName(), iTestResult);
         System.out.printf("======================================== TEST %s PASSED Duration: %ss ========================================%n", iTestResult.getName(),
                 getExecutionTime(iTestResult));
         System.out.println();
@@ -31,7 +30,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult iTestResult) {
         WebDriver driver = (WebDriver) iTestResult.getTestContext().getAttribute("driver");
-        ScreenshotFactory.createScreenshot(driver, iTestResult.getTestClass().getName(), iTestResult);
+        ScreenshotUtils.createScreenshot(driver, iTestResult.getTestClass().getName(), iTestResult);
         System.out.printf("======================================== FAILED TEST %s Duration: %ss ========================================%n", iTestResult.getName(),
                 getExecutionTime(iTestResult));
         System.out.println();
@@ -40,7 +39,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
         WebDriver driver = (WebDriver) iTestResult.getTestContext().getAttribute("driver");
-        ScreenshotFactory.createScreenshot(driver, iTestResult.getTestClass().getName(), iTestResult);
+        ScreenshotUtils.createScreenshot(driver, iTestResult.getTestClass().getName(), iTestResult);
         System.out.printf("======================================== SKIPPING TEST %s ========================================%n", iTestResult.getName());
         System.out.println();
     }
