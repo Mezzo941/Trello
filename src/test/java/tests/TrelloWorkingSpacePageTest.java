@@ -1,58 +1,30 @@
 package tests;
 
+import com.sun.org.glassfish.gmbal.Description;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.BoardPage.accessLvl;
 
 import static pages.BoardPage.accessLvl.*;
 
 
 public class TrelloWorkingSpacePageTest extends BaseTest {
 
-    @Test
-    public void creationDefaultBoardIsSuccessfully() {
-        String name = "DefaultBoard";
-        Assert.assertTrue(
-                homePage
-                        .open()
-                        .isOpened()
-        );
-        homePage.logIn();
-        Assert.assertTrue(loginPage.isOpened());
-        loginSteps.positiveAuthorization(EMAIL);
-        Assert.assertTrue(atlassianLoginPage.isOpened());
-        atlassianLoginSteps.login(PASS);
-        Assert.assertTrue(trelloWorkingSpacePage.isOpened());
-        trelloWorkingSpaceSteps.createBoard(name, WORKING);
-        Assert.assertTrue(boardPage.isOpened(name));
-        Assert.assertEquals(boardPage.getAccessLvl(), "Для рабочего пространства");
-        trelloWorkingSpacePage.open();
-        Assert.assertTrue(trelloWorkingSpacePage.isBoardCreated(name));
+    @DataProvider(name = "boardData")
+    public Object[][] getData() {
+        return new Object[][]
+                {
+                        {EMAIL, PASS, "PrivateBoard2", PRIVATE, "Приватная"},
+                        {EMAIL, PASS, "PublicBoard2", PUBLIC, "Публичная"},
+                        {EMAIL, PASS, "DefaultBoard2", WORKING, "Для рабочего пространства"},
+                };
     }
 
-    @Test
-    public void creationPrivateBoardIsSuccessfully() {
-        String name = "PrivateBoard";
-        Assert.assertTrue(
-                homePage
-                        .open()
-                        .isOpened()
-        );
-        homePage.logIn();
-        Assert.assertTrue(loginPage.isOpened());
-        loginSteps.positiveAuthorization(EMAIL);
-        Assert.assertTrue(atlassianLoginPage.isOpened());
-        atlassianLoginSteps.login(PASS);
-        Assert.assertTrue(trelloWorkingSpacePage.isOpened());
-        trelloWorkingSpaceSteps.createBoard(name, PRIVATE);
-        Assert.assertTrue(boardPage.isOpened(name));
-        Assert.assertEquals(boardPage.getAccessLvl(), "Приватная");
-        trelloWorkingSpacePage.open();
-        Assert.assertTrue(trelloWorkingSpacePage.isBoardCreated(name));
-    }
 
-    @Test
-    public void creationPublicBoardIsSuccessfully() {
-        String name = "PublicBoard";
+    @Description("Creating boards with different access types")
+    @Test(dataProvider = "boardData")
+    public void boardCreationIsSuccessful(String email, String pass, String boardName, accessLvl lvl, String expLvl) {
         Assert.assertTrue(
                 homePage
                         .open()
@@ -60,15 +32,15 @@ public class TrelloWorkingSpacePageTest extends BaseTest {
         );
         homePage.logIn();
         Assert.assertTrue(loginPage.isOpened());
-        loginSteps.positiveAuthorization(EMAIL);
+        loginSteps.positiveAuthorization(email);
         Assert.assertTrue(atlassianLoginPage.isOpened());
-        atlassianLoginSteps.login(PASS);
+        atlassianLoginSteps.login(pass);
         Assert.assertTrue(trelloWorkingSpacePage.isOpened());
-        trelloWorkingSpaceSteps.createBoard(name, PUBLIC);
-        Assert.assertTrue(boardPage.isOpened(name));
-        Assert.assertEquals(boardPage.getAccessLvl(), "Публичная");
+        trelloWorkingSpaceSteps.createBoard(boardName, lvl);
+        Assert.assertTrue(boardPage.isOpened(boardName));
+        Assert.assertEquals(boardPage.getAccessLvl(), expLvl);
         trelloWorkingSpacePage.open();
-        Assert.assertTrue(trelloWorkingSpacePage.isBoardCreated(name));
+        Assert.assertTrue(trelloWorkingSpacePage.isBoardCreated(boardName));
     }
 
 }
