@@ -31,10 +31,10 @@ public class HomePage extends BasePage {
     @Description("Open home trello page")
     public HomePage open() {
         try {
-            log.info("Open " + BASE_URI);
-            driver.get(BASE_URI);
+            log.info("Open " + BASE_URL);
+            driver.get(BASE_URL);
         } catch (WebDriverException e) {
-            Assert.fail("Can't open page by this URL " + BASE_URI);
+            Assert.fail("Can't open page by this URL " + BASE_URL);
         }
         return this;
     }

@@ -1,6 +1,6 @@
 package tests;
 
-import steps.TrelloAreaSteps;
+import steps.TrelloWorkingSpaceSteps;
 import utils.ScreenshotUtils;
 import factory.WebDriverFactory;
 import lombok.extern.log4j.Log4j2;
@@ -21,18 +21,20 @@ import java.time.Duration;
 @Listeners(TestListener.class)
 public class BaseTest {
 
-    public WebDriver driver;
+    private WebDriver driver;
+
     protected static final String EMAIL = PropertyReader.getProperty("trello.email");
     protected static final String PASS = PropertyReader.getProperty("trello.pass");
+
     protected HomePage homePage;
-    protected SendLetterPage sendLetterPage;
     protected LoginPage loginPage;
     protected AtlassianLoginPage atlassianLoginPage;
-    protected TrelloAreaPage trelloAreaPage;
+    protected TrelloWorkingSpacePage trelloWorkingSpacePage;
+    protected BoardPage boardPage;
 
     protected LoginSteps loginSteps;
     protected AtlassianLoginSteps atlassianLoginSteps;
-    protected TrelloAreaSteps trelloAreaSteps;
+    protected TrelloWorkingSpaceSteps trelloWorkingSpaceSteps;
 
     @BeforeSuite
     public void deleteScreenDir() throws IOException {
@@ -42,22 +44,21 @@ public class BaseTest {
     @BeforeMethod
     public void setUp(ITestContext context) {
         try {
-            driver = WebDriverFactory.gerDriver("chrome", "start-maximized");
+            driver = WebDriverFactory.gerDriver("chrome","headless");
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             context.setAttribute("driver", driver);
         } catch (NullPointerException e) {
-            log.fatal("driver is " + driver);
-            e.printStackTrace();
             Assert.fail("driver assert was failed. Details: " + driver);
+            e.printStackTrace();
         }
         homePage = new HomePage(driver);
-        sendLetterPage = new SendLetterPage(driver);
         loginPage = new LoginPage(driver);
         loginSteps = new LoginSteps(driver);
         atlassianLoginPage = new AtlassianLoginPage(driver);
         atlassianLoginSteps = new AtlassianLoginSteps(driver);
-        trelloAreaPage = new TrelloAreaPage(driver);
-        trelloAreaSteps = new TrelloAreaSteps(driver);
+        trelloWorkingSpacePage = new TrelloWorkingSpacePage(driver);
+        trelloWorkingSpaceSteps = new TrelloWorkingSpaceSteps(driver);
+        boardPage = new BoardPage(driver);
     }
 
     @AfterMethod(alwaysRun = true)

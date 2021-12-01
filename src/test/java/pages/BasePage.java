@@ -12,7 +12,7 @@ import java.time.Duration;
 public abstract class BasePage {
 
     protected final WebDriver driver;
-    protected static final String BASE_URI = "https://trello.com/";
+    protected static final String BASE_URL = "https://trello.com/";
     protected static final By TITLE_PATH = By.tagName("h1");
 
     public BasePage(WebDriver driver) {
@@ -26,14 +26,15 @@ public abstract class BasePage {
         } catch (TimeoutException e) {
             Assert.fail("Time is over. Page Didn't load");
         }
-        log.info("Title of the page have loaded: " + element.getText());
-        return driver.findElement(titlePath).getText().equals(title) && isScriptsComplete();
+        log.info("Title of the page was loaded: " + element.getText());
+        return driver.findElement(titlePath).getText().equals(title) && isScriptComplete();
     }
 
-    private boolean isScriptsComplete() {
+    private boolean isScriptComplete() {
         boolean status = new WebDriverWait(driver, Duration.ofSeconds(5))
                 .until(webDriver -> ((JavascriptExecutor) webDriver)
-                        .executeScript("return document.readyState").equals("complete"));
+                        .executeScript("return document.readyState")
+                        .equals("complete"));
         if (status) {
             return true;
         } else {

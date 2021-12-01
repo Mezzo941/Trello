@@ -14,9 +14,11 @@ public class ElementsTryCatcher {
                 element = driver.findElement(webElement);
             } catch (InvalidSelectorException e) {
                 Assert.fail("Element didn't load. Invalid selector: " + webElement);
+                e.printStackTrace();
             }
         } catch (NoSuchElementException e1) {
-            Assert.fail("Can't locate element on the page: " + webElement);
+            Assert.fail("Can't locate element: " + webElement + " on the page: " + driver.getCurrentUrl());
+            e1.printStackTrace();
         }
         return element;
     }

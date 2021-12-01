@@ -36,13 +36,14 @@ public class AtlassianLoginPage extends BasePage {
     }
 
     public String getError() {
+        WebElement element;
         try {
-            new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(LOGIN_ERROR));
-            log.info("get error after bad password. Error details: " + LOGIN_ERROR);
+            element = new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(LOGIN_ERROR));
+            log.info("get error after bad password. Error details: " + element.getText());
             return driver.findElement(LOGIN_ERROR).getText();
-        } catch (Exception e) {
-            new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(PASSWORD_ERROR));
-            log.info("get error after bad password. Error details: " + PASSWORD_ERROR);
+        } catch (TimeoutException e) {
+            element = new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(PASSWORD_ERROR));
+            log.info("get error after bad password. Error details: " + element.getText());
             return driver.findElement(PASSWORD_ERROR).getText();
         }
     }

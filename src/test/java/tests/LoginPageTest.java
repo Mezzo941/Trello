@@ -53,7 +53,7 @@ public class LoginPageTest extends BaseTest {
         loginSteps.positiveAuthorization(EMAIL);
         Assert.assertTrue(atlassianLoginPage.isOpened());
         atlassianLoginSteps.login(PASS);
-        Assert.assertTrue(trelloAreaPage.isOpened());
+        Assert.assertTrue(trelloWorkingSpacePage.isOpened());
     }
 
 
