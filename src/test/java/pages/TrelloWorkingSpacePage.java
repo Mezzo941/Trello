@@ -10,6 +10,7 @@ import pages.BoardPage.accessLvl;
 import utils.ElementsTryCatcher;
 
 import java.time.Duration;
+import java.util.List;
 
 import static pages.BoardPage.accessLvl.*;
 
@@ -25,7 +26,7 @@ public class TrelloWorkingSpacePage extends BasePage {
     private static final By SUBMIT_PUBLIC = By.xpath("//button[contains(text(),'Да, сделать')]");
     private static final String SELECT_ACCESS_LVL = "//div[contains(text(),'%s')]";
     private static final String TITLE = "ВАШИ РАБОЧИЕ ПРОСТРАНСТВА";
-    private static final String BOARD_TITLE = "//h3[contains(text(),'ВАШИ')]/following::div[text()='%s']";
+    private static final String BOARD_TITLE = "//h3[contains(text(),'" + TITLE + "')]/following::div[text()='%s']";
 
     public TrelloWorkingSpacePage(WebDriver driver) {
         super(driver);
@@ -41,6 +42,19 @@ public class TrelloWorkingSpacePage extends BasePage {
         }
     }
 
+    public void clickToTheBoard(String boardName) {
+        log.info("Click to the board: " + boardName);
+        By board = By.xpath(String.format(BOARD_TITLE, boardName));
+        WebElement element = ElementsTryCatcher.protect(driver, board);
+        try {
+            element.click();
+        } catch (ElementClickInterceptedException e) {
+            Assert.fail("Can't click to the board");
+            e.printStackTrace();
+        }
+    }
+
+    @Description("Open Trello working space")
     public void open() {
         log.info("Go to the working space");
         driver.get("https://trello.com/vsevolod268/boards");
@@ -122,15 +136,8 @@ public class TrelloWorkingSpacePage extends BasePage {
 
     public boolean isBoardCreated(String title) {
         By titleByXpath = By.xpath(String.format(BOARD_TITLE, title));
-        WebElement element = ElementsTryCatcher.protect(driver, titleByXpath);
-        boolean status = false;
-        try {
-            status = element.isDisplayed();
-        } catch (Exception e) {
-            Assert.fail("Board didn't create");
-            e.printStackTrace();
-        }
-        return status;
+        List<WebElement> elements = driver.findElements(titleByXpath);
+        return elements.size() > 0;
     }
 
 }
