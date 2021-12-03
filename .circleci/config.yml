@@ -22,7 +22,7 @@ jobs:
           command: google-chrome --version
       - run:
           name: Set rus language into chrome
-          command: sudo apt-get install chrome-browser-l10n
+          command: export LANGUAGE=ru_BR.UTF-8 && /usr/bin/google-chrome-stable %U
       - run:
           name: Running tests
           command: mvn clean test
