@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
@@ -9,42 +10,31 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
+
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <regressionXmlRun>src/test/java/tests/resources/runner.xml</regressionXmlRun>
+        <regression>src/test/resources/runner.xml</regression>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <aspectj.version>1.9.7</aspectj.version>
+        <mavenSFP.version>3.0.0-M5</mavenSFP.version>
+        <allure.TestNG.version>2.17.0</allure.TestNG.version>
 
     </properties>
 
-
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-                <configuration>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>${regressionXmlRun}</suiteXmlFile>
-                    </suiteXmlFiles>
-                    <argLine>
-                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/1.9.6/aspectjweaver-1.9.6.jar
-                        -Xmx256m
-                    </argLine>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>2.10.0</version>
-            </plugin>
-        </plugins>
-    </build>
-
-
     <dependencies>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.TestNG.version}</version>
+            <scope>test</scope>
+        </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
         <dependency>
@@ -82,6 +72,7 @@
             <artifactId>log4j-core</artifactId>
             <version>2.14.1</version>
         </dependency>
+
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
@@ -94,8 +85,31 @@
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>2.13.0</version>
         </dependency>
-
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.10.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${mavenSFP.version}</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${regression}</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                        -Xmx256m
+                    </argLine>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
