@@ -14,7 +14,7 @@ public class Waiter {
     public static WebElement waitElement(WebDriver driver, By locator) {
         WebElement element = null;
         try {
-            element = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOfElementLocated(locator));
+            element = new WebDriverWait(driver, Duration.ofSeconds(25)).until(ExpectedConditions.visibilityOfElementLocated(locator));
         } catch (TimeoutException e) {
             Assert.fail("Element didn't load: " + locator);
             e.printStackTrace();

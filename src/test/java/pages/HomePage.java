@@ -1,6 +1,6 @@
 package pages;
 
-import com.sun.org.glassfish.gmbal.Description;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.testng.Assert;
@@ -28,7 +28,7 @@ public class HomePage extends BasePage {
         }
     }
 
-    @Description("Open home trello page")
+    @Step("Open home trello page")
     public HomePage open() {
         try {
             log.info("Open " + BASE_URL);
@@ -39,7 +39,7 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    @Description("Click to the login link")
+    @Step("Click to the login link")
     public void logIn() {
         log.info("Click to the login link");
         WebElement element = Waiter.waitElement(driver, LOG_IN_BUTTON);

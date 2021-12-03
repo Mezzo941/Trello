@@ -1,6 +1,6 @@
 package pages;
 
-import com.sun.org.glassfish.gmbal.Description;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,7 +24,7 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    @Description("Login trello page is opened")
+    @Step("Login trello page is opened")
     public boolean isOpened() {
         boolean status = super.isOpened(TITLE, TITLE_PATH);
         if (status) {

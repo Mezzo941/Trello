@@ -1,10 +1,11 @@
 package tests;
 
-import com.sun.org.glassfish.gmbal.Description;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.BoardPage.accessLvl;
+import utils.RetryAnalyzer;
 
 import static pages.BoardPage.accessLvl.*;
 
@@ -31,8 +32,8 @@ public class TrelloWorkingSpacePageTest extends BaseTest {
                 };
     }
 
-    @Description("Creating boards with different access types")
     @Test(dataProvider = "forCreating", priority = 1)
+    @Description("Creating boards with different access types")
     public void boardCreationIsSuccessful(String email, String pass, String boardName, accessLvl lvl, String expLvl) {
         Assert.assertTrue(
                 homePage
@@ -53,6 +54,7 @@ public class TrelloWorkingSpacePageTest extends BaseTest {
     }
 
     @Test(dataProvider = "forDeletion", priority = 2)
+    @Description("Creating boards with different access types")
     public void boardDeletionIsSuccessful(String email, String pass, String boardName) {
         Assert.assertTrue(
                 homePage
@@ -70,7 +72,7 @@ public class TrelloWorkingSpacePageTest extends BaseTest {
         Assert.assertFalse(trelloWorkingSpacePage.isBoardCreated(boardName));
     }
 
-    @Test(invocationCount = 2,enabled = false)
+    @Test(retryAnalyzer = RetryAnalyzer.class,enabled = false)
     public void boardDeletionIsSuccessful2() {
         Assert.assertTrue(
                 homePage

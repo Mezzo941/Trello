@@ -1,6 +1,6 @@
 package tests;
 
-import com.sun.org.glassfish.gmbal.Description;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -25,8 +25,9 @@ public class LoginPageTest extends BaseTest {
                 };
     }
 
-    @Description("Negative login test with using invalid data")
+
     @Test(dataProvider = "userData", priority = 1)
+    @Description("Negative login test with using invalid data")
     public void negativeLoginTest(String email, String password, String error) {
         Assert.assertTrue(
                 homePage
@@ -39,8 +40,8 @@ public class LoginPageTest extends BaseTest {
         Assert.assertEquals(loginPage.getError(), error);
     }
 
-    @Description("Positive login test with using valid data")
     @Test(priority = 2)
+    @Description("Positive login test with using valid data")
     public void positiveLoginTest() {
         Assert.assertTrue(
                 homePage

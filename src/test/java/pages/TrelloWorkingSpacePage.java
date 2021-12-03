@@ -1,6 +1,6 @@
 package pages;
 
-import com.sun.org.glassfish.gmbal.Description;
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -54,34 +54,34 @@ public class TrelloWorkingSpacePage extends BasePage {
         }
     }
 
-    @Description("Open Trello working space")
+    @Step("Open Trello working space")
     public void open() {
         log.info("Go to the working space");
         driver.get("https://trello.com/vsevolod268/boards");
     }
 
-    @Description("Click the button 'Create board'")
+    @Step("Click the button 'Create board'")
     public void clickTheButtonCreateBoard() {
         log.info("Click the button 'Create board'");
         WebElement element = Waiter.waitElement(driver, CREATE_BOARD_BUTTON);
         element.click();
     }
 
-    @Description("Insert board's name")
+    @Step("Insert board's name")
     public void insertBoardsName(String name) {
         log.info("Insert board's name: " + name);
         WebElement element = Waiter.waitElement(driver, ADD_BOARD_TITLE);
         element.sendKeys(name);
     }
 
-    @Description("Choose access lvl")
+    @Step("Choose access lvl")
     public void clickToChooseAccess() {
         log.info("Click the button 'Select access'");
         WebElement element = Waiter.waitElement(driver, ACCESS);
         element.click();
     }
 
-    @Description("Select access level")
+    @Step("Select access level")
     public void selectAccessLvl(accessLvl lvl) {
         switch (lvl) {
             case PUBLIC: {
@@ -105,7 +105,7 @@ public class TrelloWorkingSpacePage extends BasePage {
         }
     }
 
-    @Description("Submit creation board")
+    @Step("Submit creation board")
     public void submitCreationBoard() {
         WebElement element = Waiter.waitElement(driver, SUBMIT_CREATE_BOARD);
         try {
@@ -122,7 +122,7 @@ public class TrelloWorkingSpacePage extends BasePage {
         }
     }
 
-    @Description("Submit public")
+    @Step("Submit public")
     public void submitPublic() {
         WebElement element = Waiter.waitElement(driver, SUBMIT_PUBLIC);
         try {
