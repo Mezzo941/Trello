@@ -22,7 +22,7 @@ jobs:
           command: google-chrome --version
       - run:
           name: Change lang to rus
-          command: google-chrome --lang=ru
+          command: export LC_MESSAGES=ru_RU.UTF-8
       - run:
           name: Running tests
           command: mvn clean test
