@@ -7,7 +7,7 @@ import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import utils.ElementsTryCatcher;
+import utils.Waiter;
 
 
 @Log4j2
@@ -37,13 +37,13 @@ public class BoardPage extends BasePage {
     }
 
     public String getAccessLvl() {
-        WebElement element = ElementsTryCatcher.protect(driver, ACCESS_LVL);
+        WebElement element = Waiter.waitElement(driver, ACCESS_LVL);
         return element.getText();
     }
 
     public void clickMenuButton() {
         log.info("Click Menu");
-        WebElement element = ElementsTryCatcher.protect(driver, MENU);
+        WebElement element = Waiter.waitElement(driver, MENU);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
@@ -54,7 +54,7 @@ public class BoardPage extends BasePage {
 
     public void clickOpenMore() {
         log.info("Click 'more' button");
-        WebElement element = ElementsTryCatcher.protect(driver, MENU_OPEN_MORE);
+        WebElement element = Waiter.waitElement(driver, MENU_OPEN_MORE);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
@@ -65,7 +65,7 @@ public class BoardPage extends BasePage {
 
     public void closeBoard() {
         log.info("Click 'close board' button");
-        WebElement element = ElementsTryCatcher.protect(driver, CLOSE_BOARD);
+        WebElement element = Waiter.waitElement(driver, CLOSE_BOARD);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
@@ -76,7 +76,7 @@ public class BoardPage extends BasePage {
 
     public void confirmClosingBoard() {
         log.info("Confirm closing board");
-        WebElement element = ElementsTryCatcher.protect(driver, CONFIRM_CLOSE_BOARD);
+        WebElement element = Waiter.waitElement(driver, CONFIRM_CLOSE_BOARD);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
@@ -87,7 +87,7 @@ public class BoardPage extends BasePage {
 
     public void deleteBoard() {
         log.info("Click to 'delete board' button");
-        WebElement element = ElementsTryCatcher.protect(driver, DELETE_BOARD);
+        WebElement element = Waiter.waitElement(driver, DELETE_BOARD);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
@@ -98,7 +98,7 @@ public class BoardPage extends BasePage {
 
     public void confirmDeleteBoard() {
         log.info("Confirm delete board");
-        WebElement element = ElementsTryCatcher.protect(driver, CONFIRM_DELETE_BOARD);
+        WebElement element = Waiter.waitElement(driver, CONFIRM_DELETE_BOARD);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
@@ -109,7 +109,7 @@ public class BoardPage extends BasePage {
 
     public void backToMenu(){
         log.info("Click back to menu");
-        WebElement element = ElementsTryCatcher.protect(driver, BACK_TO_MENU_ARROW);
+        WebElement element = Waiter.waitElement(driver, BACK_TO_MENU_ARROW);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {

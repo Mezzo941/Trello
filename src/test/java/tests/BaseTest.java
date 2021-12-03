@@ -41,10 +41,11 @@ public class BaseTest {
         ScreenshotUtils.deleteScreenDir();
     }
 
+    @Parameters("browser")
     @BeforeMethod
-    public void setUp(ITestContext context) {
+    public void setUp(@Optional("chrome") String browser, ITestContext context) {
         try {
-            driver = WebDriverFactory.gerDriver("chrome","headless");
+            driver = WebDriverFactory.gerDriver(browser, "headless");
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             context.setAttribute("driver", driver);
         } catch (NullPointerException e) {

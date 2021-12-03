@@ -11,12 +11,12 @@ public class LoginSteps extends BaseSteps {
     public void negativeAuthorization(String login, String pass) {
         loginPage.inputLogin(login);
         loginPage.inputPassword(pass);
-        loginPage.clickLoginButton();
+        loginPage.clickLoginButtonNegative();
     }
 
     public void positiveAuthorization(String login) {
         loginPage.inputLogin(login);
-        loginPage.clickLoginButton();
+        loginPage.clickLoginButtonPositive();
     }
 
 }

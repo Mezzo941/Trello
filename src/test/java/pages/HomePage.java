@@ -4,7 +4,7 @@ import com.sun.org.glassfish.gmbal.Description;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.testng.Assert;
-import utils.ElementsTryCatcher;
+import utils.Waiter;
 
 @Log4j2
 public class HomePage extends BasePage {
@@ -42,7 +42,7 @@ public class HomePage extends BasePage {
     @Description("Click to the login link")
     public void logIn() {
         log.info("Click to the login link");
-        WebElement element = ElementsTryCatcher.protect(driver, LOG_IN_BUTTON);
+        WebElement element = Waiter.waitElement(driver, LOG_IN_BUTTON);
         element.click();
     }
 

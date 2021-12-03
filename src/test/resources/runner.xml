@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Regression tests" parallel="classes" thread-count="1">
+
+    <listeners>
+        <listener class-name="utils.TestListener"/>
+        <listener class-name="utils.AnnotationTransformer"/>
+    </listeners>
+
+    <test name="thread1">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="tests.LoginPageTest"/>
+            <class name="tests.AtlassianLoginPageTest"/>
+            <class name="tests.TrelloWorkingSpacePageTest"/>
+        </classes>
+    </test>
+
+    <!--<test name="thread2">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="tests.LoginPageTest"/>
+            <class name="tests.AtlassianLoginPageTest"/>
+            <class name="tests.TrelloWorkingSpacePageTest"/>
+        </classes>
+    </test>-->
+
+</suite>

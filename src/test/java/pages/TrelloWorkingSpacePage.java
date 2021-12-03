@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pages.BoardPage.accessLvl;
-import utils.ElementsTryCatcher;
+import utils.Waiter;
 
 import java.time.Duration;
 import java.util.List;
@@ -45,7 +45,7 @@ public class TrelloWorkingSpacePage extends BasePage {
     public void clickToTheBoard(String boardName) {
         log.info("Click to the board: " + boardName);
         By board = By.xpath(String.format(BOARD_TITLE, boardName));
-        WebElement element = ElementsTryCatcher.protect(driver, board);
+        WebElement element = Waiter.waitElement(driver, board);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
@@ -63,21 +63,21 @@ public class TrelloWorkingSpacePage extends BasePage {
     @Description("Click the button 'Create board'")
     public void clickTheButtonCreateBoard() {
         log.info("Click the button 'Create board'");
-        WebElement element = ElementsTryCatcher.protect(driver, CREATE_BOARD_BUTTON);
+        WebElement element = Waiter.waitElement(driver, CREATE_BOARD_BUTTON);
         element.click();
     }
 
     @Description("Insert board's name")
     public void insertBoardsName(String name) {
         log.info("Insert board's name: " + name);
-        WebElement element = ElementsTryCatcher.protect(driver, ADD_BOARD_TITLE);
+        WebElement element = Waiter.waitElement(driver, ADD_BOARD_TITLE);
         element.sendKeys(name);
     }
 
     @Description("Choose access lvl")
     public void clickToChooseAccess() {
         log.info("Click the button 'Select access'");
-        WebElement element = ElementsTryCatcher.protect(driver, ACCESS);
+        WebElement element = Waiter.waitElement(driver, ACCESS);
         element.click();
     }
 
@@ -86,19 +86,19 @@ public class TrelloWorkingSpacePage extends BasePage {
         switch (lvl) {
             case PUBLIC: {
                 log.info("Access level: " + PUBLIC);
-                WebElement element = ElementsTryCatcher.protect(driver, By.xpath(String.format(SELECT_ACCESS_LVL, "Публичная")));
+                WebElement element = Waiter.waitElement(driver, By.xpath(String.format(SELECT_ACCESS_LVL, "Публичная")));
                 element.click();
                 break;
             }
             case PRIVATE: {
                 log.info("Access level: " + PRIVATE);
-                WebElement element = ElementsTryCatcher.protect(driver, By.xpath(String.format(SELECT_ACCESS_LVL, "Приватная")));
+                WebElement element = Waiter.waitElement(driver, By.xpath(String.format(SELECT_ACCESS_LVL, "Приватная")));
                 element.click();
                 break;
             }
             case WORKING: {
                 log.info("Access level: " + WORKING);
-                WebElement element = ElementsTryCatcher.protect(driver, By.xpath(String.format(SELECT_ACCESS_LVL, "Для рабочего")));
+                WebElement element = Waiter.waitElement(driver, By.xpath(String.format(SELECT_ACCESS_LVL, "Для рабочего")));
                 element.click();
                 break;
             }
@@ -107,7 +107,7 @@ public class TrelloWorkingSpacePage extends BasePage {
 
     @Description("Submit creation board")
     public void submitCreationBoard() {
-        WebElement element = ElementsTryCatcher.protect(driver, SUBMIT_CREATE_BOARD);
+        WebElement element = Waiter.waitElement(driver, SUBMIT_CREATE_BOARD);
         try {
             log.info("Submit creation board");
             try {
@@ -124,7 +124,7 @@ public class TrelloWorkingSpacePage extends BasePage {
 
     @Description("Submit public")
     public void submitPublic() {
-        WebElement element = ElementsTryCatcher.protect(driver, SUBMIT_PUBLIC);
+        WebElement element = Waiter.waitElement(driver, SUBMIT_PUBLIC);
         try {
             log.info("Submit public");
             element.click();

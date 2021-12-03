@@ -30,14 +30,11 @@ public class TrelloWorkingSpaceSteps extends BaseSteps {
     public void deleteBoard(String boardName) {
         trelloWorkingSpacePage.clickToTheBoard(boardName);
         boardPage.isOpened(boardName);
-        boardPage.clickMenuButton();
-        /*String lvl = boardPage.getAccessLvl();
-        if (lvl.equals("Публичная")) {
-            log.info("------------------: " + lvl);
-            boardPage.backToMenu();
-        } else {
+        if (!boardName.equals("PublicBoard")) {
             boardPage.clickMenuButton();
-        }*/
+        } else {
+            boardPage.backToMenu();
+        }
         boardPage.clickOpenMore();
         boardPage.closeBoard();
         boardPage.confirmClosingBoard();

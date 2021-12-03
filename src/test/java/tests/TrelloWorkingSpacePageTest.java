@@ -70,4 +70,20 @@ public class TrelloWorkingSpacePageTest extends BaseTest {
         Assert.assertFalse(trelloWorkingSpacePage.isBoardCreated(boardName));
     }
 
+    @Test(invocationCount = 2,enabled = false)
+    public void boardDeletionIsSuccessful2() {
+        Assert.assertTrue(
+                homePage
+                        .open()
+                        .isOpened()
+        );
+        homePage.logIn();
+        Assert.assertTrue(loginPage.isOpened());
+        loginSteps.positiveAuthorization(EMAIL);
+        Assert.assertTrue(atlassianLoginPage.isOpened());
+        atlassianLoginSteps.login(PASS);
+        Assert.assertTrue(trelloWorkingSpacePage.isOpened());
+        trelloWorkingSpaceSteps.deleteBoard("DefaultBoard");
+    }
+
 }

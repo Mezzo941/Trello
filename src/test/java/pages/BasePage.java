@@ -22,7 +22,7 @@ public abstract class BasePage {
     protected boolean isOpened(String title, By titlePath) {
         WebElement element = null;
         try {
-            element = new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(titlePath));
+            element = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(titlePath));
         } catch (TimeoutException e) {
             Assert.fail("Time is over. Page Didn't load");
         }

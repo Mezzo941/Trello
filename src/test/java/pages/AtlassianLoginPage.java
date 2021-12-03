@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.ElementsTryCatcher;
+import utils.Waiter;
 
 import java.time.Duration;
 
@@ -50,13 +50,13 @@ public class AtlassianLoginPage extends BasePage {
 
     public void inputPassword(String pass) {
         log.info("Enter atlassian password: " + pass);
-        WebElement element = ElementsTryCatcher.protect(driver, INPUT_PASS);
+        WebElement element = Waiter.waitElement(driver, INPUT_PASS);
         element.sendKeys(pass);
     }
 
     public void clickLoginButton() {
         log.info("click login button");
-        WebElement element = ElementsTryCatcher.protect(driver, LOGIN_BUTTON);
+        WebElement element = Waiter.waitElement(driver, LOGIN_BUTTON);
         element.click();
     }
 }

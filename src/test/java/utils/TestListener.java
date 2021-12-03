@@ -22,7 +22,7 @@ public class TestListener implements ITestListener {
     public void onTestSuccess(ITestResult iTestResult) {
         WebDriver driver = (WebDriver) iTestResult.getTestContext().getAttribute("driver");
         ScreenshotUtils.createScreenshot(driver, iTestResult.getTestClass().getName(), iTestResult);
-        System.out.printf("======================================== TEST %s PASSED Duration: %ss ========================================%n", iTestResult.getName(),
+        System.out.printf("======================================== TEST PASSED %s  Duration: %ss ========================================%n", iTestResult.getName(),
                 getExecutionTime(iTestResult));
         System.out.println();
     }
