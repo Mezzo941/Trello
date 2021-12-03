@@ -45,7 +45,7 @@ public class BaseTest {
     @BeforeMethod
     public void setUp(@Optional("chrome") String browser, ITestContext context) {
         try {
-            driver = WebDriverFactory.gerDriver(browser, "headless","--lang=de");
+            driver = WebDriverFactory.gerDriver(browser, "headless","--lang=ru");
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             context.setAttribute("driver", driver);
         } catch (NullPointerException e) {
