@@ -21,8 +21,8 @@ jobs:
           name: Check browser version
           command: google-chrome --version
       - run:
-          name: change lang to rus
-          command: google-chrome --lang=rus
+          name: Change lang to rus
+          command: google-chrome --lang=ru
       - run:
           name: Running tests
           command: mvn clean test
