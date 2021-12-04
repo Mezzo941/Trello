@@ -1,5 +1,6 @@
 package utils;
 
+import factory.ScreenshotFactory;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestListener;
@@ -22,6 +23,7 @@ public class TestListener implements ITestListener {
     public void onTestSuccess(ITestResult iTestResult) {
         WebDriver driver = (WebDriver) iTestResult.getTestContext().getAttribute("driver");
         ScreenshotUtils.createScreenshot(driver, iTestResult.getTestClass().getName(), iTestResult);
+        ScreenshotFactory.getScreen(driver);
         System.out.printf("======================================== TEST PASSED %s  Duration: %ss ========================================%n", iTestResult.getName(),
                 getExecutionTime(iTestResult));
         System.out.println();
@@ -31,6 +33,7 @@ public class TestListener implements ITestListener {
     public void onTestFailure(ITestResult iTestResult) {
         WebDriver driver = (WebDriver) iTestResult.getTestContext().getAttribute("driver");
         ScreenshotUtils.createScreenshot(driver, iTestResult.getTestClass().getName(), iTestResult);
+        ScreenshotFactory.getScreen(driver);
         System.out.printf("======================================== FAILED TEST %s Duration: %ss ========================================%n", iTestResult.getName(),
                 getExecutionTime(iTestResult));
         System.out.println();
@@ -40,6 +43,7 @@ public class TestListener implements ITestListener {
     public void onTestSkipped(ITestResult iTestResult) {
         WebDriver driver = (WebDriver) iTestResult.getTestContext().getAttribute("driver");
         ScreenshotUtils.createScreenshot(driver, iTestResult.getTestClass().getName(), iTestResult);
+        ScreenshotFactory.getScreen(driver);
         System.out.printf("======================================== SKIPPING TEST %s ========================================%n", iTestResult.getName());
         System.out.println();
     }

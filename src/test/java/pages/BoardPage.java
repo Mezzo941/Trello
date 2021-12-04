@@ -20,6 +20,7 @@ public class BoardPage extends BasePage {
     private static final By CONFIRM_CLOSE_BOARD = By.cssSelector("[value='Закрыть']");
     private static final By DELETE_BOARD = By.cssSelector("[data-test-id='close-board-delete-board-button']");
     private static final By CONFIRM_DELETE_BOARD = By.cssSelector("[data-test-id='close-board-delete-board-confirm-button']");
+    private static final By OPEN_BOARD_AGAIN = By.cssSelector("[data-test-id='workspace-chooser-trigger-button']");
     private static final By BACK_TO_MENU_ARROW = By.cssSelector(".js-pop-widget-view");
 
     public BoardPage(WebDriver driver) {
@@ -87,6 +88,7 @@ public class BoardPage extends BasePage {
 
     public void deleteBoard() {
         log.info("Click to 'delete board' button");
+        Waiter.waitElement(driver, OPEN_BOARD_AGAIN);
         WebElement element = Waiter.waitElement(driver, DELETE_BOARD);
         try {
             element.click();
@@ -107,7 +109,7 @@ public class BoardPage extends BasePage {
         }
     }
 
-    public void backToMenu(){
+    public void backToMenu() {
         log.info("Click back to menu");
         WebElement element = Waiter.waitElement(driver, BACK_TO_MENU_ARROW);
         try {
