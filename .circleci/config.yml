@@ -21,9 +21,6 @@ jobs:
           name: Check browser version
           command: google-chrome --version
       - run:
-          name: Set rus language into chrome
-          command: sudo apt-get install chromium-browser-l10n
-      - run:
           name: Running tests
           command: mvn clean test
       - run:
