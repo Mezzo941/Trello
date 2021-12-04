@@ -12,7 +12,7 @@ import java.time.Duration;
 public abstract class BasePage {
 
     protected final WebDriver driver;
-    protected static final String BASE_URL = "https://trello.com/";
+    protected static final String BASE_URL = "https://trello.com/ru/home";
     protected static final By TITLE_PATH = By.tagName("h1");
 
     public BasePage(WebDriver driver) {
