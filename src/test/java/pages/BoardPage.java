@@ -39,6 +39,7 @@ public class BoardPage extends BasePage {
 
     public String getAccessLvl() {
         WebElement element = Waiter.waitElement(driver, ACCESS_LVL);
+        log.info("Access lvl of the board: " + element.getText());
         return element.getText();
     }
 

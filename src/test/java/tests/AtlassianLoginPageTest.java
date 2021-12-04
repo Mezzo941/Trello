@@ -9,17 +9,17 @@ public class AtlassianLoginPageTest extends BaseTest {
     @DataProvider(name = "userData")
     private Object[][] getData() {
         return new Object[][]{
-                {"12345678", "Неверный адрес электронной почты и/или пароль.\n" +
-                        "Требуется помощь, чтобы войти?"},
-                {"12", "Неверный адрес электронной почты и/или пароль.\n" +
-                        "Требуется помощь, чтобы войти?"},
+                {"12345678", "Incorrect email address and / or password.\n" +
+                        "Do you need help logging in?"},
+                {"12", "Incorrect email address and / or password.\n" +
+                        "Do you need help logging in?"},
                 {"nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" +
                         "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-                        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "Неверный адрес электронной почты и/или пароль.\n" +
-                        "Требуется помощь, чтобы войти?"},
-                {"1 2", "Неверный адрес электронной почты и/или пароль.\n" +
-                        "Требуется помощь, чтобы войти?"},
-                {"", "Введите пароль"}
+                        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "Incorrect email address and / or password.\n" +
+                        "Do you need help logging in?"},
+                {"1 2", "Incorrect email address and / or password.\n" +
+                        "Do you need help logging in?"},
+                {"", "Enter your password"}
         };
     }
 
