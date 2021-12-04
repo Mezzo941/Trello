@@ -19,4 +19,10 @@ public class LoginSteps extends BaseSteps {
         loginPage.clickLoginButtonPositive();
     }
 
+    public void authorizationFromCloud(String email, String pass) {
+        loginPage.inputLogin(email);
+        loginPage.inputPassword(pass);
+        loginPage.clickLoginButtonNegative();
+    }
+
 }

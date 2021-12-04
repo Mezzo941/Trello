@@ -19,7 +19,7 @@ public class LoginPageTest extends BaseTest {
                         {"Александр", "", "Аккаунта с таким именем пользователя не существует"},
                         {"fdfdffdffdfdffdffdfdffdffdfdffdffdfdffdffdfdffdffdfdffdffdfdffdffdfdffd" +
                                 "ffdfdffdffdfdffdffdfdffdffdfdffdffdfdffdffdfdffdffdfdffdffdfdffd" +
-                                "ffdfdffdffdfdffdffdfdffdffdfdffdf@gmail.com"," ",
+                                "ffdfdffdffdfdffdffdfdffdffdfdffdf@gmail.com", " ",
                                 "Аккаунт с таким адресом электронной почты не существует"},
                         {" fdfdff@kek.com", "", "Аккаунт с таким адресом электронной почты не существует"},
                 };
@@ -50,7 +50,7 @@ public class LoginPageTest extends BaseTest {
         );
         homePage.logIn();
         Assert.assertTrue(loginPage.isOpened());
-        loginSteps.positiveAuthorization(EMAIL);
+        loginSteps.authorizationFromCloud(EMAIL, PASS);
         Assert.assertTrue(atlassianLoginPage.isOpened());
         atlassianLoginSteps.login(PASS);
         Assert.assertTrue(trelloWorkingSpacePage.isOpened());
