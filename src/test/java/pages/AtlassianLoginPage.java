@@ -20,13 +20,14 @@ public class AtlassianLoginPage extends BasePage {
     protected static final By LOGIN_ERROR = By.id("login-error");
     protected static final By PASSWORD_ERROR = By.id("password-error");
     protected static final String TITLE = "Войдите, чтобы перейти далее:";
+    protected static final String TITLE_EN = "Log in to continue to:";
 
     public AtlassianLoginPage(WebDriver driver) {
         super(driver);
     }
 
     public boolean isOpened() {
-        boolean status = super.isOpened(TITLE, TITLE_PATH);
+        boolean status = super.isOpened(TITLE_EN, TITLE_PATH);
         if (status) {
             log.info("Atlassian page is opened");
             return true;
