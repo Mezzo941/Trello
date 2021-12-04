@@ -16,7 +16,7 @@ public class AtlassianLoginPage extends BasePage {
 
     protected static final By LOGIN_BUTTON = By.id("login-submit");
     protected static final By INPUT_PASS = By.id("password");
-    protected static final By TITLE_PATH = By.xpath("//div[contains(text(),'Войдите')]");
+    protected static final By TITLE_PATH = By.xpath("//section//div[contains(text(),'Trello')]");
     protected static final By LOGIN_ERROR = By.id("login-error");
     protected static final By PASSWORD_ERROR = By.id("password-error");
     protected static final String TITLE = "Войдите, чтобы перейти далее:";
