@@ -17,6 +17,7 @@ import utils.TestListener;
 import java.io.IOException;
 import java.time.Duration;
 
+
 @Log4j2
 @Listeners(TestListener.class)
 public class BaseTest {
@@ -45,7 +46,7 @@ public class BaseTest {
     @BeforeMethod
     public void setUp(@Optional("chrome") String browser, ITestContext context) {
         try {
-            driver = WebDriverFactory.gerDriver(browser, "headless","--lang=ru");
+            driver = WebDriverFactory.gerDriver(browser, "--headless","--lang=en");
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             context.setAttribute("driver", driver);
         } catch (NullPointerException e) {

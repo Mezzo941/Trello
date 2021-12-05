@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   browser-tools: circleci/browser-tools@1.2.1
 jobs:
-  regression_tests:
+  functional_tests:
     docker:
       - image: cimg/openjdk:11.0-browsers
     steps:
@@ -35,14 +35,14 @@ workflows:
   version: 2
   commit:
     jobs:
-      - regression_tests
+      - functional_tests
   periodical:
     triggers:
       - schedule:
-          cron: "0 23 * * *"
+          cron: "0 17 * * *"
           filters:
             branches:
               only:
                 - features
     jobs:
-      - regression_tests
+      - functional_tests

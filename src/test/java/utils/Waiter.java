@@ -11,7 +11,7 @@ import java.time.Duration;
 @Log4j2
 public class Waiter {
 
-    public static WebElement waitElement(WebDriver driver, By locator) {
+    public static WebElement waitVisibilityOfElement(WebDriver driver, By locator) {
         WebElement element = null;
         try {
             element = new WebDriverWait(driver, Duration.ofSeconds(25)).until(ExpectedConditions.visibilityOfElementLocated(locator));

@@ -8,6 +8,7 @@ import org.testng.Assert;
 
 import java.time.Duration;
 
+
 @Log4j2
 public abstract class BasePage {
 
@@ -21,17 +22,32 @@ public abstract class BasePage {
 
     protected boolean isOpened(String title, By titlePath) {
         WebElement element = null;
+        boolean status = false;
         try {
-            element = new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(titlePath));
+            element = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOfElementLocated(titlePath));
+            status = isScriptComplete();
+        } catch (Exception e) {
+            Assert.fail("Time is over. Page Didn't load");
+        }
+        log.info("Title of the page was loaded: " + element.getText() + ". Script's status is " + status);
+        return element.getText().equals(title) && status;
+    }
+
+    protected boolean isOpened(By uniquePagesLocator) {
+        WebElement element = null;
+        boolean status = false;
+        try {
+            element = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOfElementLocated(uniquePagesLocator));
+            status = isScriptComplete();
         } catch (TimeoutException e) {
             Assert.fail("Time is over. Page Didn't load");
         }
-        log.info("Title of the page was loaded: " + element.getText());
-        return driver.findElement(titlePath).getText().equals(title) && isScriptComplete();
+        log.info("Unique page's element is loaded. Script's status is " + status);
+        return element.isDisplayed() && status;
     }
 
     private boolean isScriptComplete() {
-        boolean status = new WebDriverWait(driver, Duration.ofSeconds(5))
+        boolean status = new WebDriverWait(driver, Duration.ofSeconds(20))
                 .until(webDriver -> ((JavascriptExecutor) webDriver)
                         .executeScript("return document.readyState")
                         .equals("complete"));
@@ -41,6 +57,22 @@ public abstract class BasePage {
             log.fatal("Scripts didn't complete");
             return false;
         }
+    }
+
+    public String getError(By loginError, By passError) {
+        WebElement element = null;
+        try {
+            element = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOfElementLocated(loginError));
+            log.info("get error after bad login. Error details: " + element.getText());
+        } catch (TimeoutException e1) {
+            try {
+                element = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOfElementLocated(passError));
+                log.info("get error after bad password. Error details: " + element.getText());
+            } catch (TimeoutException e2) {
+                Assert.fail("Error didn't load on the page: " + passError);
+            }
+        }
+        return element.getText();
     }
 
 }

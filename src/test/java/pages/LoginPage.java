@@ -5,7 +5,6 @@ import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import utils.Waiter;
 
 import java.time.Duration;
@@ -17,7 +16,7 @@ public class LoginPage extends BasePage {
     private static final By INPUT_PASS = By.cssSelector("[name='password']");
     private static final By SUBMIT_BUTTON = By.id("login");
     public static final By PASSWORD_ERROR = By.xpath("//div[@id='password-error']/p");
-    public static final By ERROR = By.xpath("//div[@id='error']/p");
+    public static final By LOGIN_ERROR = By.xpath("//div[@id='error']/p");
     private static final String TITLE = "Вход в Trello";
 
     public LoginPage(WebDriver driver) {
@@ -36,43 +35,35 @@ public class LoginPage extends BasePage {
     }
 
     public String getError() {
-        WebElement element = null;
-        try {
-            element = new WebDriverWait(driver, Duration.ofSeconds(8)).until(ExpectedConditions.visibilityOfElementLocated(ERROR));
-            log.info("get error after bad login. Error details: " + element.getText());
-        } catch (TimeoutException e1) {
-            try {
-                element = new WebDriverWait(driver, Duration.ofSeconds(8)).until(ExpectedConditions.visibilityOfElementLocated(PASSWORD_ERROR));
-                log.info("get error after bad login. Error details: " + element.getText());
-            } catch (TimeoutException e2) {
-                Assert.fail("Error didn't find didn't load on the page: " + PASSWORD_ERROR);
-            }
-        }
-        return element.getText();
+        return super.getError(LOGIN_ERROR, PASSWORD_ERROR);
     }
 
+    @Step("Input login")
     public void inputLogin(String login) {
         log.info("input login: " + login);
-        WebElement element = Waiter.waitElement(driver, INPUT_LOGIN);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, INPUT_LOGIN);
         element.sendKeys(login);
     }
 
+    @Step("Input password")
     public void inputPassword(String pass) {
         log.info("input password: " + pass);
-        WebElement element = Waiter.waitElement(driver, INPUT_PASS);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, INPUT_PASS);
         element.sendKeys(pass);
     }
 
+    @Step("Submit login")
     public void clickLoginButtonPositive() {
         log.info("click to login button");
-        WebElement element = Waiter.waitElement(driver, SUBMIT_BUTTON);
-        new WebDriverWait(driver,Duration.ofSeconds(10)).until(ExpectedConditions.invisibilityOfElementLocated(INPUT_PASS));
+        WebElement element = Waiter.waitVisibilityOfElement(driver, SUBMIT_BUTTON);
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.invisibilityOfElementLocated(INPUT_PASS));
         element.click();
     }
 
+    @Step("Submit login")
     public void clickLoginButtonNegative() {
         log.info("click to login button");
-        WebElement element = Waiter.waitElement(driver, SUBMIT_BUTTON);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, SUBMIT_BUTTON);
         element.click();
     }
 

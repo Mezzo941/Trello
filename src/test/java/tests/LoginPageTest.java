@@ -7,7 +7,6 @@ import org.testng.annotations.Test;
 
 public class LoginPageTest extends BaseTest {
 
-
     @DataProvider(name = "userData")
     public Object[][] getData() {
         return new Object[][]
@@ -24,7 +23,6 @@ public class LoginPageTest extends BaseTest {
                         {" fdfdff@kek.com", "", "Аккаунт с таким адресом электронной почты не существует"},
                 };
     }
-
 
     @Test(dataProvider = "userData", priority = 1)
     @Description("Negative login test with using invalid data")
@@ -50,11 +48,10 @@ public class LoginPageTest extends BaseTest {
         );
         homePage.logIn();
         Assert.assertTrue(loginPage.isOpened());
-        loginSteps.authorizationFromCloud(EMAIL, PASS);
+        loginSteps.authorizationFromCloud(EMAIL, PASS); //TODO перед пушем менять метод!
         Assert.assertTrue(atlassianLoginPage.isOpened());
         atlassianLoginSteps.login(PASS);
         Assert.assertTrue(trelloWorkingSpacePage.isOpened());
     }
-
 
 }

@@ -5,7 +5,6 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.BoardPage.accessLvl;
-import utils.RetryAnalyzer;
 
 import static pages.BoardPage.accessLvl.*;
 
@@ -70,22 +69,6 @@ public class TrelloWorkingSpacePageTest extends BaseTest {
         trelloWorkingSpaceSteps.deleteBoard(boardName);
         Assert.assertTrue(trelloWorkingSpacePage.isOpened());
         Assert.assertFalse(trelloWorkingSpacePage.isBoardCreated(boardName));
-    }
-
-    @Test(retryAnalyzer = RetryAnalyzer.class,enabled = false)
-    public void boardDeletionIsSuccessful2() {
-        Assert.assertTrue(
-                homePage
-                        .open()
-                        .isOpened()
-        );
-        homePage.logIn();
-        Assert.assertTrue(loginPage.isOpened());
-        loginSteps.positiveAuthorization(EMAIL);
-        Assert.assertTrue(atlassianLoginPage.isOpened());
-        atlassianLoginSteps.login(PASS);
-        Assert.assertTrue(trelloWorkingSpacePage.isOpened());
-        trelloWorkingSpaceSteps.deleteBoard("DefaultBoard");
     }
 
 }

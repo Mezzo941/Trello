@@ -9,21 +9,19 @@ import utils.Waiter;
 @Log4j2
 public class HomePage extends BasePage {
 
-    private static final By LOG_IN_BUTTON = By.xpath("//a[contains(text(),'Войти')]");
-    private static final By SIGN_UP_BUTTON = By.xpath("//a[contains(text(),'Рег')]");
-    private static final String TITLE = "Trello помогает командам эффективно решать рабочие задачи.";
+    private static final By LOG_IN_BUTTON = By.xpath("//div[@class='float-right buttons']/a[contains(@href,'login')]");
+    private static final By HEADER = By.cssSelector("[data-track-group='Global Header']");
 
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
     public boolean isOpened() {
-        boolean status = super.isOpened(TITLE,TITLE_PATH);
+        boolean status = super.isOpened(HEADER);
         if (status) {
             log.info("Home page is opened");
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -42,7 +40,7 @@ public class HomePage extends BasePage {
     @Step("Click to the login link")
     public void logIn() {
         log.info("Click to the login link");
-        WebElement element = Waiter.waitElement(driver, LOG_IN_BUTTON);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, LOG_IN_BUTTON);
         element.click();
     }
 

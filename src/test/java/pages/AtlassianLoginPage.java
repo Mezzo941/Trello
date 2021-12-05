@@ -1,15 +1,11 @@
 package pages;
 
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.Waiter;
-
-import java.time.Duration;
 
 @Log4j2
 public class AtlassianLoginPage extends BasePage {
@@ -36,27 +32,20 @@ public class AtlassianLoginPage extends BasePage {
     }
 
     public String getError() {
-        WebElement element;
-        try {
-            element = new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(LOGIN_ERROR));
-            log.info("get error after bad password. Error details: " + element.getText());
-            return driver.findElement(LOGIN_ERROR).getText();
-        } catch (TimeoutException e) {
-            element = new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(PASSWORD_ERROR));
-            log.info("get error after bad password. Error details: " + element.getText());
-            return driver.findElement(PASSWORD_ERROR).getText();
-        }
+        return super.getError(LOGIN_ERROR, PASSWORD_ERROR);
     }
 
+    @Step("Input password")
     public void inputPassword(String pass) {
         log.info("Enter atlassian password: " + pass);
-        WebElement element = Waiter.waitElement(driver, INPUT_PASS);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, INPUT_PASS);
         element.sendKeys(pass);
     }
 
+    @Step("click login button")
     public void clickLoginButton() {
         log.info("click login button");
-        WebElement element = Waiter.waitElement(driver, LOGIN_BUTTON);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, LOGIN_BUTTON);
         element.click();
     }
 }

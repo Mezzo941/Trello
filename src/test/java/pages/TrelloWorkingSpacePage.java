@@ -42,10 +42,11 @@ public class TrelloWorkingSpacePage extends BasePage {
         }
     }
 
+    @Step("Click to the board")
     public void clickToTheBoard(String boardName) {
         log.info("Click to the board: " + boardName);
         By board = By.xpath(String.format(BOARD_TITLE, boardName));
-        WebElement element = Waiter.waitElement(driver, board);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, board);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
@@ -63,21 +64,21 @@ public class TrelloWorkingSpacePage extends BasePage {
     @Step("Click the button 'Create board'")
     public void clickTheButtonCreateBoard() {
         log.info("Click the button 'Create board'");
-        WebElement element = Waiter.waitElement(driver, CREATE_BOARD_BUTTON);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, CREATE_BOARD_BUTTON);
         element.click();
     }
 
     @Step("Insert board's name")
     public void insertBoardsName(String name) {
         log.info("Insert board's name: " + name);
-        WebElement element = Waiter.waitElement(driver, ADD_BOARD_TITLE);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, ADD_BOARD_TITLE);
         element.sendKeys(name);
     }
 
-    @Step("Choose access lvl")
+    @Step("Click button to choose access lvl")
     public void clickToChooseAccess() {
         log.info("Click the button 'Select access'");
-        WebElement element = Waiter.waitElement(driver, ACCESS);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, ACCESS);
         element.click();
     }
 
@@ -86,19 +87,19 @@ public class TrelloWorkingSpacePage extends BasePage {
         switch (lvl) {
             case PUBLIC: {
                 log.info("Access level: " + PUBLIC);
-                WebElement element = Waiter.waitElement(driver, By.xpath(String.format(SELECT_ACCESS_LVL, "Публичная")));
+                WebElement element = Waiter.waitVisibilityOfElement(driver, By.xpath(String.format(SELECT_ACCESS_LVL, "Публичная")));
                 element.click();
                 break;
             }
             case PRIVATE: {
                 log.info("Access level: " + PRIVATE);
-                WebElement element = Waiter.waitElement(driver, By.xpath(String.format(SELECT_ACCESS_LVL, "Приватная")));
+                WebElement element = Waiter.waitVisibilityOfElement(driver, By.xpath(String.format(SELECT_ACCESS_LVL, "Приватная")));
                 element.click();
                 break;
             }
             case WORKING: {
                 log.info("Access level: " + WORKING);
-                WebElement element = Waiter.waitElement(driver, By.xpath(String.format(SELECT_ACCESS_LVL, "Для рабочего")));
+                WebElement element = Waiter.waitVisibilityOfElement(driver, By.xpath(String.format(SELECT_ACCESS_LVL, "Для рабочего")));
                 element.click();
                 break;
             }
@@ -107,7 +108,7 @@ public class TrelloWorkingSpacePage extends BasePage {
 
     @Step("Submit creation board")
     public void submitCreationBoard() {
-        WebElement element = Waiter.waitElement(driver, SUBMIT_CREATE_BOARD);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, SUBMIT_CREATE_BOARD);
         try {
             log.info("Submit creation board");
             try {
@@ -124,7 +125,7 @@ public class TrelloWorkingSpacePage extends BasePage {
 
     @Step("Submit public")
     public void submitPublic() {
-        WebElement element = Waiter.waitElement(driver, SUBMIT_PUBLIC);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, SUBMIT_PUBLIC);
         try {
             log.info("Submit public");
             element.click();
@@ -134,6 +135,7 @@ public class TrelloWorkingSpacePage extends BasePage {
         }
     }
 
+    @Step("Check for board exists")
     public boolean isBoardCreated(String title) {
         By titleByXpath = By.xpath(String.format(BOARD_TITLE, title));
         List<WebElement> elements = driver.findElements(titleByXpath);

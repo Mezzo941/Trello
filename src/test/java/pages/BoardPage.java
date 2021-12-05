@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
@@ -38,14 +39,15 @@ public class BoardPage extends BasePage {
     }
 
     public String getAccessLvl() {
-        WebElement element = Waiter.waitElement(driver, ACCESS_LVL);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, ACCESS_LVL);
         log.info("Access lvl of the board: " + element.getText());
         return element.getText();
     }
 
+    @Step("Click menu")
     public void clickMenuButton() {
         log.info("Click Menu");
-        WebElement element = Waiter.waitElement(driver, MENU);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, MENU);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
@@ -54,9 +56,10 @@ public class BoardPage extends BasePage {
         }
     }
 
+    @Step("Click 'open more'")
     public void clickOpenMore() {
-        log.info("Click 'more' button");
-        WebElement element = Waiter.waitElement(driver, MENU_OPEN_MORE);
+        log.info("Click 'open more'");
+        WebElement element = Waiter.waitVisibilityOfElement(driver, MENU_OPEN_MORE);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
@@ -65,9 +68,10 @@ public class BoardPage extends BasePage {
         }
     }
 
+    @Step("Click 'close board'")
     public void closeBoard() {
-        log.info("Click 'close board' button");
-        WebElement element = Waiter.waitElement(driver, CLOSE_BOARD);
+        log.info("Click 'close board'");
+        WebElement element = Waiter.waitVisibilityOfElement(driver, CLOSE_BOARD);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
@@ -76,9 +80,10 @@ public class BoardPage extends BasePage {
         }
     }
 
+    @Step("Click 'confirm close board'")
     public void confirmClosingBoard() {
-        log.info("Confirm closing board");
-        WebElement element = Waiter.waitElement(driver, CONFIRM_CLOSE_BOARD);
+        log.info("Click 'confirm close board'");
+        WebElement element = Waiter.waitVisibilityOfElement(driver, CONFIRM_CLOSE_BOARD);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
@@ -87,10 +92,11 @@ public class BoardPage extends BasePage {
         }
     }
 
+    @Step("Click 'delete board'")
     public void deleteBoard() {
-        log.info("Click to 'delete board' button");
-        Waiter.waitElement(driver, OPEN_BOARD_AGAIN);
-        WebElement element = Waiter.waitElement(driver, DELETE_BOARD);
+        log.info("Click 'delete board'");
+        Waiter.waitVisibilityOfElement(driver, OPEN_BOARD_AGAIN);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, DELETE_BOARD);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
@@ -99,9 +105,10 @@ public class BoardPage extends BasePage {
         }
     }
 
+    @Step("Confirm delete board")
     public void confirmDeleteBoard() {
         log.info("Confirm delete board");
-        WebElement element = Waiter.waitElement(driver, CONFIRM_DELETE_BOARD);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, CONFIRM_DELETE_BOARD);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
@@ -110,9 +117,10 @@ public class BoardPage extends BasePage {
         }
     }
 
+    @Step("Click 'back to menu'")
     public void backToMenu() {
-        log.info("Click back to menu");
-        WebElement element = Waiter.waitElement(driver, BACK_TO_MENU_ARROW);
+        log.info("Click 'back to menu'");
+        WebElement element = Waiter.waitVisibilityOfElement(driver, BACK_TO_MENU_ARROW);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {

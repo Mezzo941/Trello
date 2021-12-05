@@ -27,6 +27,7 @@ public class TrelloWorkingSpaceSteps extends BaseSteps {
         trelloWorkingSpacePage.submitCreationBoard();
     }
 
+    //TODO переделать метод так, чтобы сранивал не с названием борда, а с уровнем доступа к нему
     public void deleteBoard(String boardName) {
         trelloWorkingSpacePage.clickToTheBoard(boardName);
         boardPage.isOpened(boardName);
