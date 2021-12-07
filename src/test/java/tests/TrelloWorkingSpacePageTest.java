@@ -39,17 +39,15 @@ public class TrelloWorkingSpacePageTest extends BaseTest {
                         .open()
                         .isOpened()
         );
-        homePage.logIn();
+        homePage.clickToLoginLink();
         Assert.assertTrue(loginPage.isOpened());
-        loginSteps.positiveAuthorization(email);
-        Assert.assertTrue(atlassianLoginPage.isOpened());
-        atlassianLoginSteps.login(pass);
-        Assert.assertTrue(trelloWorkingSpacePage.isOpened());
+        loginSteps.positiveAuthorization(email, pass);
+        atlassianLoginSteps.validLogin(pass);
         trelloWorkingSpaceSteps.createBoard(boardName, lvl);
-        Assert.assertTrue(boardPage.isOpened(boardName));
         Assert.assertEquals(boardPage.getAccessLvl(), expLvl);
         trelloWorkingSpacePage.open();
-        Assert.assertTrue(trelloWorkingSpacePage.isBoardCreated(boardName));
+        Assert.assertTrue(trelloWorkingSpacePage.isOpened());
+        Assert.assertTrue(trelloWorkingSpacePage.isBoardExists(boardName));
     }
 
     @Test(dataProvider = "forDeletion", priority = 2)
@@ -60,15 +58,12 @@ public class TrelloWorkingSpacePageTest extends BaseTest {
                         .open()
                         .isOpened()
         );
-        homePage.logIn();
+        homePage.clickToLoginLink();
         Assert.assertTrue(loginPage.isOpened());
-        loginSteps.positiveAuthorization(email);
-        Assert.assertTrue(atlassianLoginPage.isOpened());
-        atlassianLoginSteps.login(pass);
-        Assert.assertTrue(trelloWorkingSpacePage.isOpened());
+        loginSteps.positiveAuthorization(email, pass);
+        atlassianLoginSteps.validLogin(pass);
         trelloWorkingSpaceSteps.deleteBoard(boardName);
-        Assert.assertTrue(trelloWorkingSpacePage.isOpened());
-        Assert.assertFalse(trelloWorkingSpacePage.isBoardCreated(boardName));
+        Assert.assertFalse(trelloWorkingSpacePage.isBoardExists(boardName));
     }
 
 }

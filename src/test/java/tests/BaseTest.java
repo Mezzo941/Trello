@@ -1,5 +1,6 @@
 package tests;
 
+import steps.BoardSteps;
 import steps.TrelloWorkingSpaceSteps;
 import utils.ScreenshotUtils;
 import factory.WebDriverFactory;
@@ -36,6 +37,7 @@ public class BaseTest {
     protected LoginSteps loginSteps;
     protected AtlassianLoginSteps atlassianLoginSteps;
     protected TrelloWorkingSpaceSteps trelloWorkingSpaceSteps;
+    protected BoardSteps boardSteps;
 
     @BeforeSuite
     public void deleteScreenDir() throws IOException {
@@ -46,21 +48,24 @@ public class BaseTest {
     @BeforeMethod
     public void setUp(@Optional("chrome") String browser, ITestContext context) {
         try {
-            driver = WebDriverFactory.gerDriver(browser, "--headless","--lang=en");
+            driver = WebDriverFactory.gerDriver(browser, "--headless", "--lang=en");
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            context.setAttribute("driver", driver);
         } catch (NullPointerException e) {
             Assert.fail("driver assert was failed. Details: " + driver);
             e.printStackTrace();
         }
+        context.setAttribute("driver", driver);
+        //init pages
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
-        loginSteps = new LoginSteps(driver);
         atlassianLoginPage = new AtlassianLoginPage(driver);
-        atlassianLoginSteps = new AtlassianLoginSteps(driver);
         trelloWorkingSpacePage = new TrelloWorkingSpacePage(driver);
-        trelloWorkingSpaceSteps = new TrelloWorkingSpaceSteps(driver);
         boardPage = new BoardPage(driver);
+        //init steps
+        loginSteps = new LoginSteps(loginPage);
+        atlassianLoginSteps = new AtlassianLoginSteps(atlassianLoginPage);
+        trelloWorkingSpaceSteps = new TrelloWorkingSpaceSteps(trelloWorkingSpacePage, boardPage);
+        boardSteps = new BoardSteps(boardPage);
     }
 
     @AfterMethod(alwaysRun = true)

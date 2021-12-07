@@ -32,11 +32,10 @@ public class AtlassianLoginPageTest extends BaseTest {
                                 .open()
                                 .isOpened()
                 );
-        homePage.logIn();
+        homePage.clickToLoginLink();
         Assert.assertTrue(loginPage.isOpened());
-        loginSteps.positiveAuthorization(EMAIL);
-        Assert.assertTrue(atlassianLoginPage.isOpened());
-        atlassianLoginSteps.login(pass);
+        loginSteps.positiveAuthorization(EMAIL, PASS);
+        atlassianLoginSteps.invalidLogin(pass);
         Assert.assertEquals(atlassianLoginPage.getError(), error);
     }
 

@@ -32,7 +32,7 @@ public class LoginPageTest extends BaseTest {
                         .open()
                         .isOpened()
         );
-        homePage.logIn();
+        homePage.clickToLoginLink();
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.negativeAuthorization(email, password);
         Assert.assertEquals(loginPage.getError(), error);
@@ -46,12 +46,10 @@ public class LoginPageTest extends BaseTest {
                         .open()
                         .isOpened()
         );
-        homePage.logIn();
+        homePage.clickToLoginLink();
         Assert.assertTrue(loginPage.isOpened());
-        loginSteps.authorizationFromCloud(EMAIL, PASS); //TODO перед пушем менять метод!
-        Assert.assertTrue(atlassianLoginPage.isOpened());
-        atlassianLoginSteps.login(PASS);
-        Assert.assertTrue(trelloWorkingSpacePage.isOpened());
+        loginSteps.positiveAuthorization(EMAIL, PASS);
+        atlassianLoginSteps.validLogin(PASS);
     }
 
 }

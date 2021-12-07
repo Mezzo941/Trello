@@ -45,8 +45,8 @@ public class TrelloWorkingSpacePage extends BasePage {
     @Step("Click to the board")
     public void clickToTheBoard(String boardName) {
         log.info("Click to the board: " + boardName);
-        By board = By.xpath(String.format(BOARD_TITLE, boardName));
-        WebElement element = Waiter.waitVisibilityOfElement(driver, board);
+        By boardLocator = By.xpath(String.format(BOARD_TITLE, boardName));
+        WebElement element = Waiter.waitVisibilityOfElement(driver, boardLocator);
         try {
             element.click();
         } catch (ElementClickInterceptedException e) {
@@ -136,9 +136,10 @@ public class TrelloWorkingSpacePage extends BasePage {
     }
 
     @Step("Check for board exists")
-    public boolean isBoardCreated(String title) {
+    public boolean isBoardExists(String title) {
         By titleByXpath = By.xpath(String.format(BOARD_TITLE, title));
         List<WebElement> elements = driver.findElements(titleByXpath);
+        log.info("Number of boards found: " + elements.size());
         return elements.size() > 0;
     }
 

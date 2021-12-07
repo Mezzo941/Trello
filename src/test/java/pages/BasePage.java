@@ -9,6 +9,7 @@ import org.testng.Assert;
 import java.time.Duration;
 
 
+
 @Log4j2
 public abstract class BasePage {
 
@@ -73,6 +74,10 @@ public abstract class BasePage {
             }
         }
         return element.getText();
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 
 }

@@ -1,15 +1,26 @@
 package steps;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import pages.AtlassianLoginPage;
+import pages.TrelloWorkingSpacePage;
 
-public class AtlassianLoginSteps extends BaseSteps{
+public class AtlassianLoginSteps {
 
-    public AtlassianLoginSteps(WebDriver driver) {
-        super(driver);
+    private final AtlassianLoginPage atlassianLoginPage;
+
+    public AtlassianLoginSteps(AtlassianLoginPage atlassianLoginPage) {
+        this.atlassianLoginPage = atlassianLoginPage;
     }
 
-    public void login(String pass){
+    public void validLogin(String pass) {
+        WebDriver driver = atlassianLoginPage.getDriver();
+        atlassianLoginPage.inputPassword(pass);
+        atlassianLoginPage.clickLoginButton();
+        Assert.assertTrue(new TrelloWorkingSpacePage(driver).isOpened());
+    }
+
+    public void invalidLogin(String pass) {
         atlassianLoginPage.inputPassword(pass);
         atlassianLoginPage.clickLoginButton();
     }

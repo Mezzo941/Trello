@@ -38,7 +38,7 @@ public class HomePage extends BasePage {
     }
 
     @Step("Click to the login link")
-    public void logIn() {
+    public void clickToLoginLink() {
         log.info("Click to the login link");
         WebElement element = Waiter.waitVisibilityOfElement(driver, LOG_IN_BUTTON);
         element.click();

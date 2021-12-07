@@ -1,17 +1,23 @@
 package steps;
 
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.WebDriver;
 
+import org.testng.Assert;
+import pages.BoardPage;
 import pages.BoardPage.accessLvl;
+import pages.TrelloWorkingSpacePage;
 
 import static pages.BoardPage.accessLvl.*;
 
 @Log4j2
-public class TrelloWorkingSpaceSteps extends BaseSteps {
+public class TrelloWorkingSpaceSteps {
 
-    public TrelloWorkingSpaceSteps(WebDriver driver) {
-        super(driver);
+    private final TrelloWorkingSpacePage trelloWorkingSpacePage;
+    private final BoardPage boardPage;
+
+    public TrelloWorkingSpaceSteps(TrelloWorkingSpacePage trelloWorkingSpacePage, BoardPage boardPage) {
+        this.trelloWorkingSpacePage = trelloWorkingSpacePage;
+        this.boardPage = boardPage;
     }
 
     public void createBoard(String boardName, accessLvl lvl) {
@@ -25,9 +31,9 @@ public class TrelloWorkingSpaceSteps extends BaseSteps {
             }
         }
         trelloWorkingSpacePage.submitCreationBoard();
+        Assert.assertTrue(boardPage.isOpened(boardName));
     }
 
-    //TODO переделать метод так, чтобы сранивал не с названием борда, а с уровнем доступа к нему
     public void deleteBoard(String boardName) {
         trelloWorkingSpacePage.clickToTheBoard(boardName);
         boardPage.isOpened(boardName);
@@ -41,6 +47,7 @@ public class TrelloWorkingSpaceSteps extends BaseSteps {
         boardPage.confirmClosingBoard();
         boardPage.deleteBoard();
         boardPage.confirmDeleteBoard();
+        Assert.assertTrue(trelloWorkingSpacePage.isOpened());
     }
 
 }
