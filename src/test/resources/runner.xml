@@ -13,16 +13,8 @@
             <class name="tests.LoginPageTest"/>
             <class name="tests.AtlassianLoginPageTest"/>
             <class name="tests.TrelloWorkingSpacePageTest"/>
+            <class name="tests.BoardPageTest"/>
         </classes>
     </test>
-
-    <!--<test name="thread2">
-        <parameter name="browser" value="firefox"/>
-        <classes>
-            <class name="tests.LoginPageTest"/>
-            <class name="tests.AtlassianLoginPageTest"/>
-            <class name="tests.TrelloWorkingSpacePageTest"/>
-        </classes>
-    </test>-->
 
 </suite>
