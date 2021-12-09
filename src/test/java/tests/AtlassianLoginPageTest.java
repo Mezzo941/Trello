@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -25,6 +26,7 @@ public class AtlassianLoginPageTest extends BaseTest {
     }
 
     @Test(dataProvider = "userData")
+    @Description("Negative login test on the atlassian page")
     public void atlassianLoginNegativeTest(String pass, String error) {
         Assert.assertTrue
                 (

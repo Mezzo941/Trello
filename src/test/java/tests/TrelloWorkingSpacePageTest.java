@@ -32,7 +32,7 @@ public class TrelloWorkingSpacePageTest extends BaseTest {
     }
 
     @Test(dataProvider = "forCreating", priority = 1)
-    @Description("Creating boards with different access types")
+    @Description("Сheck for creation of boards with different types of access")
     public void boardCreationIsSuccessful(String email, String pass, String boardName, accessLvl lvl, String expLvl) {
         Assert.assertTrue(
                 homePage
@@ -46,12 +46,11 @@ public class TrelloWorkingSpacePageTest extends BaseTest {
         trelloWorkingSpaceSteps.createBoard(boardName, lvl);
         Assert.assertEquals(boardPage.getAccessLvl(), expLvl);
         trelloWorkingSpacePage.open();
-        Assert.assertTrue(trelloWorkingSpacePage.isOpened());
         Assert.assertTrue(trelloWorkingSpacePage.isBoardExists(boardName));
     }
 
     @Test(dataProvider = "forDeletion", priority = 2)
-    @Description("Creating boards with different access types")
+    @Description("Сheck for deletion of boards")
     public void boardDeletionIsSuccessful(String email, String pass, String boardName) {
         Assert.assertTrue(
                 homePage

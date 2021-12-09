@@ -1,5 +1,6 @@
 package steps;
 
+import org.testng.Assert;
 import pages.BoardPage;
 
 public class BoardSteps {
@@ -10,10 +11,12 @@ public class BoardSteps {
         this.boardPage = boardPage;
     }
 
-    public void addCard(String listName, String title) {
+    public void addNewCard(String listName, String title) {
         boardPage.clickAddCard(listName);
         boardPage.addCardTitle(title);
         boardPage.submitAddCard();
+        boardPage.cancelAdditionCard();
+        Assert.assertTrue(boardPage.isCardExists(listName, title));
     }
 
     public void deleteCard(String listName, String title) {
@@ -21,6 +24,19 @@ public class BoardSteps {
         boardPage.clickArchiving();
         boardPage.clickDeleteCard();
         boardPage.confirmDeletionOfTheCard();
+        Assert.assertFalse(boardPage.isCardExists(listName, title));
     }
 
+    public void addNewList(String title) {
+        boardPage.clickToAddNewList();
+        boardPage.inputListTitle(title);
+        boardPage.submitAddList();
+        Assert.assertTrue(boardPage.isListExists(title));
+    }
+
+    public void archiveList(String title) {
+        boardPage.clickListMenu(title);
+        boardPage.clickArchiveList();
+        Assert.assertFalse(boardPage.isListExists(title));
+    }
 }

@@ -25,8 +25,8 @@ public abstract class BasePage {
         WebElement element = null;
         boolean status = false;
         try {
-            element = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOfElementLocated(titlePath));
             status = isScriptComplete();
+            element = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOfElementLocated(titlePath));
         } catch (Exception e) {
             Assert.fail("Time is over. Page Didn't load");
         }

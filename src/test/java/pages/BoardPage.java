@@ -3,10 +3,7 @@ package pages;
 import io.qameta.allure.Step;
 import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementClickInterceptedException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.testng.Assert;
 import utils.Waiter;
 
@@ -21,6 +18,7 @@ public class BoardPage extends BasePage {
     private static final By MENU_OPEN_MORE = By.cssSelector(".js-open-more");
     private static final By CLOSE_BOARD = By.cssSelector(".js-close-board");
     private static final By ARCHIVING = By.cssSelector(".js-archive-card");
+    private static final By ARCHIVE_LIST = By.cssSelector(".js-close-list");
     private static final By CONFIRM_CLOSE_BOARD = By.cssSelector("[value='Закрыть']");
     private static final By CONFIRM_DELETION_OF_THE_CARD = By.cssSelector("[value='Удалить']");
     private static final By DELETE_BOARD = By.cssSelector("[data-test-id='close-board-delete-board-button']");
@@ -30,9 +28,15 @@ public class BoardPage extends BasePage {
     private static final By BACK_TO_MENU_ARROW = By.cssSelector(".js-pop-widget-view");
     private static final By CARD_TITLE = By.cssSelector(".list-card-composer-textarea.js-card-title");
     private static final By SUBMIT_ADD_CARD = By.cssSelector(".js-add-card.confirm");
+    private static final By CANCEL_CARD_ADDITION = By.cssSelector(".js-cancel");
+    private static final By ADD_NEW_LIST = By.cssSelector(".placeholder");
+    private static final By ADD_LIST_TITLE = By.cssSelector(".list-name-input");
+    private static final By SUBMIT_ADD_LIST = By.cssSelector(".mod-list-add-button");
     private static final String CARD_WINDOW_TITLE = "//h2[contains(text(),'%s')]/following::textarea[contains(@class,'mod-card-back-title')]";
     private static final String ADD_CARD_BUTTON = "//textarea[contains(text(),'%s')]/ancestor::div[contains(@class,'list js-list-content')]//span[@class='js-add-a-card']";
-    private static final String CARD = "//textarea[contains(text(),'%s')]/ancestor::div[@class='list js-list-content']//*[contains(text(),'%s')]";
+    private static final String LIST = "//textarea[contains(text(),'%s')]/ancestor::div[@class='list js-list-content']";
+    private static final String CARD = LIST + "//*[contains(text(),'%s')]";
+    private static final String MEATBALLS_MENU = LIST + "//div[@class='list-header-extras']";
 
 
     public BoardPage(WebDriver driver) {
@@ -163,6 +167,12 @@ public class BoardPage extends BasePage {
         element.click();
     }
 
+
+    public void cancelAdditionCard() {
+        WebElement element = Waiter.waitVisibilityOfElement(driver, CANCEL_CARD_ADDITION);
+        element.click();
+    }
+
     @Step("Click on the card")
     public void clickOnTheCard(String listName, String title) {
         By cardLocator = By.xpath(String.format(CARD, listName, title));
@@ -194,11 +204,53 @@ public class BoardPage extends BasePage {
         element.click();
     }
 
+    @Step("Click 'Add new list'")
+    public void clickToAddNewList() {
+        WebElement element = Waiter.waitVisibilityOfElement(driver, ADD_NEW_LIST);
+        log.info("Click 'Add new list'");
+        element.click();
+    }
+
+    @Step("Input list title")
+    public void inputListTitle(String title) {
+        WebElement element = Waiter.waitVisibilityOfElement(driver, ADD_LIST_TITLE);
+        log.info("Input list title: " + title);
+        element.sendKeys(title);
+    }
+
+    @Step("Submit list addition")
+    public void submitAddList() {
+        log.info("Submit list addition");
+        WebElement element = Waiter.waitVisibilityOfElement(driver, SUBMIT_ADD_LIST);
+        element.click();
+    }
+
+    @Step("Click to list menu")
+    public void clickListMenu(String title) {
+        By menuLocator = By.xpath(String.format(MEATBALLS_MENU, title));
+        log.info("Click to menu of the list named: " + title);
+        WebElement element = Waiter.waitVisibilityOfElement(driver, menuLocator);
+        element.click();
+    }
+
+    public void clickArchiveList(){
+        log.info("Click button 'Archive List'");
+        WebElement element = Waiter.waitVisibilityOfElement(driver, ARCHIVE_LIST);
+        element.click();
+    }
+
     @Step("Check if card exists")
     public boolean isCardExists(String listName, String title) {
         By cardLocator = By.xpath(String.format(CARD, listName, title));
         List<WebElement> elements = driver.findElements(cardLocator);
-        log.info("Number of cards found: " + elements.size());
+        log.info("Number of cards named: " + title + " found in list named: " + listName + " is: " + elements.size());
+        return elements.size() > 0;
+    }
+
+    public boolean isListExists(String title) {
+        By listLocator = By.xpath(String.format(LIST, title));
+        List<WebElement> elements = driver.findElements(listLocator);
+        log.info("Number of lists named: " + title + " is: " + elements.size());
         return elements.size() > 0;
     }
 
@@ -210,4 +262,5 @@ public class BoardPage extends BasePage {
         WORKING
 
     }
+
 }
