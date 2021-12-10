@@ -20,7 +20,7 @@ public class BoardPage extends BasePage {
     private static final By ARCHIVING = By.cssSelector(".js-archive-card");
     private static final By ARCHIVE_LIST = By.cssSelector(".js-close-list");
     private static final By CONFIRM_CLOSE_BOARD = By.cssSelector("[value='Закрыть']");
-    private static final By CONFIRM_DELETION_OF_THE_CARD = By.cssSelector("[value='Удалить']");
+    private static final By CONFIRM_DELETION_OF_THE_CARD = By.cssSelector(".js-confirm");
     private static final By DELETE_BOARD = By.cssSelector("[data-test-id='close-board-delete-board-button']");
     private static final By DELETE_CARD = By.cssSelector(".js-delete-card");
     private static final By CONFIRM_DELETE_BOARD = By.cssSelector("[data-test-id='close-board-delete-board-confirm-button']");
