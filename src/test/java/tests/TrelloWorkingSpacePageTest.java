@@ -32,7 +32,7 @@ public class TrelloWorkingSpacePageTest extends BaseTest {
     }
 
     @Test(dataProvider = "forCreating", priority = 1)
-    @Description("Сheck for creation of boards with different types of access")
+    @Description("Check for creation of boards with different types of access")
     public void boardCreationIsSuccessful(String email, String pass, String boardName, accessLvl lvl, String expLvl) {
         Assert.assertTrue(
                 homePage
@@ -50,7 +50,7 @@ public class TrelloWorkingSpacePageTest extends BaseTest {
     }
 
     @Test(dataProvider = "forDeletion", priority = 2)
-    @Description("Сheck for deletion of boards")
+    @Description("Check for deletion of boards")
     public void boardDeletionIsSuccessful(String email, String pass, String boardName) {
         Assert.assertTrue(
                 homePage

@@ -1,5 +1,6 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,7 +12,7 @@ public class BoardPageTest extends BaseTest {
     public void cardCreationAndDeletionIsSuccessful() {
         String board = "DoNotDelete";
         String list = "Нужно сделать";
-        String card = "Карточка";
+        String card = new Faker().leagueOfLegends().champion();
 
         Assert.assertTrue(
                 homePage
@@ -36,9 +37,9 @@ public class BoardPageTest extends BaseTest {
         String list = "Нужно сделать";
         String list2 = "В процессе";
         String list3 = "Готово";
-        String card = "workToDo";
-        String card2 = "workInProcess";
-        String card3 = "workDone";
+        String card = new Faker().animal().name();
+        String card2 = new Faker().artist().name();
+        String card3 = new Faker().color().name();
 
         Assert.assertTrue(
                 homePage
@@ -63,8 +64,8 @@ public class BoardPageTest extends BaseTest {
     @Description("Check for successful creation and deletion of one card in new list and then archive this list")
     public void cardAdditionAndDeletionInNewListThenArchiveListIsSuccessful() {
         String board = "DoNotDelete";
-        String list = "Рандом лист";
-        String card = "Рандом карта";
+        String list = new Faker().country().name();
+        String card = new Faker().harryPotter().character();
 
         Assert.assertTrue(
                 homePage
@@ -88,9 +89,9 @@ public class BoardPageTest extends BaseTest {
     public void creatingAndDeletionThreeCardsInOneListsSuccessfully() {
         String board = "DoNotDelete";
         String list = "Нужно сделать";
-        String card = "card1";
-        String card2 = "card2";
-        String card3 = "card3";
+        String card = new Faker().ancient().titan();
+        String card2 = new Faker().superhero().name();
+        String card3 = new Faker().dog().name();
 
         Assert.assertTrue(
                 homePage
