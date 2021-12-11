@@ -17,7 +17,7 @@ public class CardPage extends BasePage {
     private static final By CONFIRM_DELETION_OF_THE_CARD = By.cssSelector(".js-confirm");
     private static final By DESCRIPTION = By.xpath("//div[contains(@class,'js-desc')]/p");
     private static final String COMMENT = "//div[contains(@class,'js-new-comment')]/following::div[@class='comment-container']//p[contains(text(),'%s')]";
-    private static final String TITLE = "//h2[contains(text(),'%s')]/following::textarea[contains(@class,'mod-card-back-title')]";
+    private static final String TITLE = "//h2[contains(text(),'%s')]/ancestor::div[@class='window-title']";
 
     public CardPage(WebDriver driver) {
         super(driver);

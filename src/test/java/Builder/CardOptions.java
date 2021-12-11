@@ -4,6 +4,7 @@ import lombok.Builder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import utils.Click;
 import utils.Waiter;
 
 
@@ -22,7 +23,7 @@ public class CardOptions {
 
     public void addDescription() {
         WebElement desc = Waiter.waitElementToBeClickable(setDriver, DESCRIPTION_TEXTAREA);
-        desc.click();
+        new Click(setDriver).byAction(desc);
         desc.sendKeys(setDescription);
         WebElement saveButton = Waiter.waitElementToBeClickable(setDriver, SAVE_DESCRIPTION);
         saveButton.click();
@@ -30,7 +31,7 @@ public class CardOptions {
 
     public void addComment() {
         WebElement desc = Waiter.waitElementToBeClickable(setDriver, COMMENT_TEXTAREA);
-        desc.click();
+        new Click(setDriver).byAction(desc);
         desc.sendKeys(setComment);
         WebElement saveButton = Waiter.waitElementToBeClickable(setDriver, SAVE_COMMENT);
         saveButton.click();

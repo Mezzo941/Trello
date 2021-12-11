@@ -31,7 +31,7 @@ public class BoardPage extends BasePage {
     private static final By SUBMIT_ADD_LIST = By.cssSelector(".mod-list-add-button");
     private static final String ADD_CARD_BUTTON = "//textarea[contains(text(),'%s')]/ancestor::div[contains(@class,'list js-list-content')]//span[@class='js-add-a-card']";
     private static final String LIST = "//textarea[contains(text(),'%s')]/ancestor::div[@class='list js-list-content']";
-    private static final String CARD = LIST + "//*[contains(text(),'%s')]";
+    private static final String CARD = "//textarea[contains(text(),'%s')]/following::div[@class='list-card-details js-card-details']//*[contains(text(),'%s')]";
     private static final String MEATBALLS_MENU = LIST + "//div[@class='list-header-extras']";
 
 
