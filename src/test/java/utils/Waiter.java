@@ -23,4 +23,15 @@ public class Waiter {
         return element;
     }
 
+    public static WebElement waitElementToBeClickable(WebDriver driver, By locator){
+        WebElement element = null;
+        try {
+            element = new WebDriverWait(driver, Duration.ofSeconds(25)).until(ExpectedConditions.elementToBeClickable(locator));
+        } catch (TimeoutException e) {
+            Assert.fail("Element isn't clickable: " + locator);
+            e.printStackTrace();
+        }
+        return element;
+    }
+
 }

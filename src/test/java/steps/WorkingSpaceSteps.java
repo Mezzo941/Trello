@@ -37,9 +37,9 @@ public class WorkingSpaceSteps {
     public void deleteBoard(String boardName) {
         workingSpacePage.clickToTheBoard(boardName);
         boardPage.isOpened(boardName);
-        if (!boardName.equals("PublicBoard")) {
-            boardPage.clickMenuButton();
-        } else {
+        String lvl = boardPage.getAccessLvl();
+        boardPage.clickMenuButton();
+        if (lvl.equals("Публичная")) {
             boardPage.backToMenu();
         }
         boardPage.clickOpenMore();

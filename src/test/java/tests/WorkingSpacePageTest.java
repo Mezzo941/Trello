@@ -65,4 +65,22 @@ public class WorkingSpacePageTest extends BaseTest {
         Assert.assertFalse(workingSpacePage.isBoardExists(boardName));
     }
 
+    @Test(enabled = false)
+    public void boardCreationIsSuccessful1() {
+        Assert.assertTrue(
+                homePage
+                        .open()
+                        .isOpened()
+        );
+        homePage.clickToLoginLink();
+        Assert.assertTrue(loginPage.isOpened());
+        loginSteps.positiveAuthorization(EMAIL, PASS);
+        atlassianLoginSteps.validLogin(PASS);
+        workingSpaceSteps.createBoard("board", PUBLIC);
+        Assert.assertEquals(boardPage.getAccessLvl(), "Публичная");
+        workingSpacePage.open();
+        workingSpaceSteps.deleteBoard("board");
+        Assert.assertFalse(workingSpacePage.isBoardExists("board"));
+    }
+
 }

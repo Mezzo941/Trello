@@ -14,6 +14,7 @@
             <class name="tests.AtlassianLoginPageTest"/>
             <class name="tests.WorkingSpacePageTest"/>
             <class name="tests.BoardPageTest"/>
+            <class name="tests.CardPageTest"/>
         </classes>
     </test>
 

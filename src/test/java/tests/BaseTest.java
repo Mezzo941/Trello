@@ -49,7 +49,7 @@ public class BaseTest {
     @BeforeMethod
     public void setUp(@Optional("chrome") String browser, ITestContext context) {
         try {
-            driver = WebDriverFactory.gerDriver(browser, "--headless", "--lang=en");
+            driver = WebDriverFactory.gerDriver(browser, /*"--headless",*/"--lang=en");
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         } catch (NullPointerException e) {
             Assert.fail("driver assert was failed. Details: " + driver);
