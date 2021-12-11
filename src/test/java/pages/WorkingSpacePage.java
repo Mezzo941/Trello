@@ -15,7 +15,7 @@ import java.util.List;
 import static pages.BoardPage.accessLvl.*;
 
 @Log4j2
-public class TrelloWorkingSpacePage extends BasePage {
+public class WorkingSpacePage extends BasePage {
 
     private static final By TITLE_PATH = By.xpath("//h3[contains(text(),'ВАШИ')]");
     private static final By CREATE_BOARD_BUTTON = By.cssSelector(".board-tile.mod-add");
@@ -28,7 +28,7 @@ public class TrelloWorkingSpacePage extends BasePage {
     private static final String TITLE = "ВАШИ РАБОЧИЕ ПРОСТРАНСТВА";
     private static final String BOARD_TITLE = "//h3[contains(text(),'" + TITLE + "')]/following::div[text()='%s']";
 
-    public TrelloWorkingSpacePage(WebDriver driver) {
+    public WorkingSpacePage(WebDriver driver) {
         super(driver);
     }
 

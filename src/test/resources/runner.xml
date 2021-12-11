@@ -12,7 +12,7 @@
         <classes>
             <class name="tests.LoginPageTest"/>
             <class name="tests.AtlassianLoginPageTest"/>
-            <class name="tests.TrelloWorkingSpacePageTest"/>
+            <class name="tests.WorkingSpacePageTest"/>
             <class name="tests.BoardPageTest"/>
         </classes>
     </test>

@@ -9,7 +9,7 @@ import pages.BoardPage.accessLvl;
 import static pages.BoardPage.accessLvl.*;
 
 
-public class TrelloWorkingSpacePageTest extends BaseTest {
+public class WorkingSpacePageTest extends BaseTest {
 
     @DataProvider(name = "forCreating")
     public Object[][] getData1() {
@@ -43,10 +43,10 @@ public class TrelloWorkingSpacePageTest extends BaseTest {
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(email, pass);
         atlassianLoginSteps.validLogin(pass);
-        trelloWorkingSpaceSteps.createBoard(boardName, lvl);
+        workingSpaceSteps.createBoard(boardName, lvl);
         Assert.assertEquals(boardPage.getAccessLvl(), expLvl);
-        trelloWorkingSpacePage.open();
-        Assert.assertTrue(trelloWorkingSpacePage.isBoardExists(boardName));
+        workingSpacePage.open();
+        Assert.assertTrue(workingSpacePage.isBoardExists(boardName));
     }
 
     @Test(dataProvider = "forDeletion", priority = 2)
@@ -61,8 +61,8 @@ public class TrelloWorkingSpacePageTest extends BaseTest {
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(email, pass);
         atlassianLoginSteps.validLogin(pass);
-        trelloWorkingSpaceSteps.deleteBoard(boardName);
-        Assert.assertFalse(trelloWorkingSpacePage.isBoardExists(boardName));
+        workingSpaceSteps.deleteBoard(boardName);
+        Assert.assertFalse(workingSpacePage.isBoardExists(boardName));
     }
 
 }

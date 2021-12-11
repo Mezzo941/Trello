@@ -5,37 +5,37 @@ import lombok.extern.log4j.Log4j2;
 import org.testng.Assert;
 import pages.BoardPage;
 import pages.BoardPage.accessLvl;
-import pages.TrelloWorkingSpacePage;
+import pages.WorkingSpacePage;
 
 import static pages.BoardPage.accessLvl.*;
 
 @Log4j2
-public class TrelloWorkingSpaceSteps {
+public class WorkingSpaceSteps {
 
-    private final TrelloWorkingSpacePage trelloWorkingSpacePage;
+    private final WorkingSpacePage workingSpacePage;
     private final BoardPage boardPage;
 
-    public TrelloWorkingSpaceSteps(TrelloWorkingSpacePage trelloWorkingSpacePage, BoardPage boardPage) {
-        this.trelloWorkingSpacePage = trelloWorkingSpacePage;
+    public WorkingSpaceSteps(WorkingSpacePage workingSpacePage, BoardPage boardPage) {
+        this.workingSpacePage = workingSpacePage;
         this.boardPage = boardPage;
     }
 
     public void createBoard(String boardName, accessLvl lvl) {
-        trelloWorkingSpacePage.clickTheButtonCreateBoard();
-        trelloWorkingSpacePage.insertBoardsName(boardName);
+        workingSpacePage.clickTheButtonCreateBoard();
+        workingSpacePage.insertBoardsName(boardName);
         if (!lvl.equals(WORKING)) {
-            trelloWorkingSpacePage.clickToChooseAccess();
-            trelloWorkingSpacePage.selectAccessLvl(lvl);
+            workingSpacePage.clickToChooseAccess();
+            workingSpacePage.selectAccessLvl(lvl);
             if (lvl.equals(PUBLIC)) {
-                trelloWorkingSpacePage.submitPublic();
+                workingSpacePage.submitPublic();
             }
         }
-        trelloWorkingSpacePage.submitCreationBoard();
+        workingSpacePage.submitCreationBoard();
         Assert.assertTrue(boardPage.isOpened(boardName));
     }
 
     public void deleteBoard(String boardName) {
-        trelloWorkingSpacePage.clickToTheBoard(boardName);
+        workingSpacePage.clickToTheBoard(boardName);
         boardPage.isOpened(boardName);
         if (!boardName.equals("PublicBoard")) {
             boardPage.clickMenuButton();
@@ -47,7 +47,7 @@ public class TrelloWorkingSpaceSteps {
         boardPage.confirmClosingBoard();
         boardPage.deleteBoard();
         boardPage.confirmDeleteBoard();
-        Assert.assertTrue(trelloWorkingSpacePage.isOpened());
+        Assert.assertTrue(workingSpacePage.isOpened());
     }
 
 }

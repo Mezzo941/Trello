@@ -2,13 +2,16 @@ package steps;
 
 import org.testng.Assert;
 import pages.BoardPage;
+import pages.CardPage;
 
 public class BoardSteps {
 
     private final BoardPage boardPage;
+    private final CardPage cardPage;
 
-    public BoardSteps(BoardPage boardPage) {
+    public BoardSteps(BoardPage boardPage, CardPage cardPage) {
         this.boardPage = boardPage;
+        this.cardPage = cardPage;
     }
 
     public void addNewCard(String listName, String title) {
@@ -21,9 +24,10 @@ public class BoardSteps {
 
     public void deleteCard(String listName, String title) {
         boardPage.clickOnTheCard(listName, title);
-        boardPage.clickArchiving();
-        boardPage.clickDeleteCard();
-        boardPage.confirmDeletionOfTheCard();
+        Assert.assertTrue(cardPage.isOpened(title));
+        cardPage.clickArchiving();
+        cardPage.clickDeleteCard();
+        cardPage.confirmDeletionOfTheCard();
         Assert.assertFalse(boardPage.isCardExists(listName, title));
     }
 

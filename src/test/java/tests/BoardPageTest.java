@@ -12,7 +12,7 @@ public class BoardPageTest extends BaseTest {
     public void cardCreationAndDeletionIsSuccessful() {
         String board = "DoNotDelete";
         String list = "Нужно сделать";
-        String card = new Faker().leagueOfLegends().champion();
+        String card = new Faker().harryPotter().spell();
 
         Assert.assertTrue(
                 homePage
@@ -23,7 +23,7 @@ public class BoardPageTest extends BaseTest {
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL, PASS);
         atlassianLoginSteps.validLogin(PASS);
-        trelloWorkingSpacePage.clickToTheBoard(board);
+        workingSpacePage.clickToTheBoard(board);
         Assert.assertTrue(boardPage.isOpened(board));
         boardSteps.addNewCard(list, card);
         boardSteps.deleteCard(list, card);
@@ -50,7 +50,7 @@ public class BoardPageTest extends BaseTest {
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL, PASS);
         atlassianLoginSteps.validLogin(PASS);
-        trelloWorkingSpacePage.clickToTheBoard(board);
+        workingSpacePage.clickToTheBoard(board);
         Assert.assertTrue(boardPage.isOpened(board));
         boardSteps.addNewCard(list, card);
         boardSteps.addNewCard(list2, card2);
@@ -76,7 +76,7 @@ public class BoardPageTest extends BaseTest {
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL, PASS);
         atlassianLoginSteps.validLogin(PASS);
-        trelloWorkingSpacePage.clickToTheBoard(board);
+        workingSpacePage.clickToTheBoard(board);
         Assert.assertTrue(boardPage.isOpened(board));
         boardSteps.addNewList(list);
         boardSteps.addNewCard(list, card);
@@ -102,7 +102,7 @@ public class BoardPageTest extends BaseTest {
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL, PASS);
         atlassianLoginSteps.validLogin(PASS);
-        trelloWorkingSpacePage.clickToTheBoard(board);
+        workingSpacePage.clickToTheBoard(board);
         Assert.assertTrue(boardPage.isOpened(board));
         boardSteps.addNewCard(list, card);
         boardSteps.addNewCard(list, card2);

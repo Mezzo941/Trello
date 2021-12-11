@@ -17,12 +17,9 @@ public class BoardPage extends BasePage {
     private static final By MENU = By.cssSelector(".js-show-sidebar");
     private static final By MENU_OPEN_MORE = By.cssSelector(".js-open-more");
     private static final By CLOSE_BOARD = By.cssSelector(".js-close-board");
-    private static final By ARCHIVING = By.cssSelector(".js-archive-card");
     private static final By ARCHIVE_LIST = By.cssSelector(".js-close-list");
     private static final By CONFIRM_CLOSE_BOARD = By.cssSelector("[value='Закрыть']");
-    private static final By CONFIRM_DELETION_OF_THE_CARD = By.cssSelector(".js-confirm");
     private static final By DELETE_BOARD = By.cssSelector("[data-test-id='close-board-delete-board-button']");
-    private static final By DELETE_CARD = By.cssSelector(".js-delete-card");
     private static final By CONFIRM_DELETE_BOARD = By.cssSelector("[data-test-id='close-board-delete-board-confirm-button']");
     private static final By OPEN_BOARD_AGAIN = By.cssSelector("[data-test-id='workspace-chooser-trigger-button']");
     private static final By BACK_TO_MENU_ARROW = By.cssSelector(".js-pop-widget-view");
@@ -32,7 +29,6 @@ public class BoardPage extends BasePage {
     private static final By ADD_NEW_LIST = By.cssSelector(".placeholder");
     private static final By ADD_LIST_TITLE = By.cssSelector(".list-name-input");
     private static final By SUBMIT_ADD_LIST = By.cssSelector(".mod-list-add-button");
-    private static final String CARD_WINDOW_TITLE = "//h2[contains(text(),'%s')]/following::textarea[contains(@class,'mod-card-back-title')]";
     private static final String ADD_CARD_BUTTON = "//textarea[contains(text(),'%s')]/ancestor::div[contains(@class,'list js-list-content')]//span[@class='js-add-a-card']";
     private static final String LIST = "//textarea[contains(text(),'%s')]/ancestor::div[@class='list js-list-content']";
     private static final String CARD = LIST + "//*[contains(text(),'%s')]";
@@ -176,33 +172,11 @@ public class BoardPage extends BasePage {
     @Step("Click on the card")
     public void clickOnTheCard(String listName, String title) {
         By cardLocator = By.xpath(String.format(CARD, listName, title));
-        By cardWindowTitleLocator = By.xpath(String.format(CARD_WINDOW_TITLE, title));
         WebElement element = Waiter.waitVisibilityOfElement(driver, cardLocator);
         log.info("Click on the card: " + title);
         element.click();
-        Waiter.waitVisibilityOfElement(driver, cardWindowTitleLocator);
     }
 
-    @Step("Click on the button 'Archiving'")
-    public void clickArchiving() {
-        WebElement element = Waiter.waitVisibilityOfElement(driver, ARCHIVING);
-        log.info("Click on the button 'Archiving'");
-        element.click();
-    }
-
-    @Step("Click on the button 'Delete card'")
-    public void clickDeleteCard() {
-        WebElement element = Waiter.waitVisibilityOfElement(driver, DELETE_CARD);
-        log.info("Click on the button 'Delete card'");
-        element.click();
-    }
-
-    @Step("Click on the button 'Confirm deletion'")
-    public void confirmDeletionOfTheCard() {
-        WebElement element = Waiter.waitVisibilityOfElement(driver, CONFIRM_DELETION_OF_THE_CARD);
-        log.info("Click on the button 'Confirm deletion'");
-        element.click();
-    }
 
     @Step("Click 'Add new list'")
     public void clickToAddNewList() {
@@ -233,6 +207,7 @@ public class BoardPage extends BasePage {
         element.click();
     }
 
+    @Step("Click button 'Archive List'")
     public void clickArchiveList(){
         log.info("Click button 'Archive List'");
         WebElement element = Waiter.waitVisibilityOfElement(driver, ARCHIVE_LIST);

@@ -1,7 +1,7 @@
 package tests;
 
 import steps.BoardSteps;
-import steps.TrelloWorkingSpaceSteps;
+import steps.WorkingSpaceSteps;
 import utils.ScreenshotUtils;
 import factory.WebDriverFactory;
 import lombok.extern.log4j.Log4j2;
@@ -31,12 +31,13 @@ public class BaseTest {
     protected HomePage homePage;
     protected LoginPage loginPage;
     protected AtlassianLoginPage atlassianLoginPage;
-    protected TrelloWorkingSpacePage trelloWorkingSpacePage;
+    protected WorkingSpacePage workingSpacePage;
     protected BoardPage boardPage;
+    protected CardPage cardPage;
 
     protected LoginSteps loginSteps;
     protected AtlassianLoginSteps atlassianLoginSteps;
-    protected TrelloWorkingSpaceSteps trelloWorkingSpaceSteps;
+    protected WorkingSpaceSteps workingSpaceSteps;
     protected BoardSteps boardSteps;
 
     @BeforeSuite
@@ -59,13 +60,14 @@ public class BaseTest {
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
         atlassianLoginPage = new AtlassianLoginPage(driver);
-        trelloWorkingSpacePage = new TrelloWorkingSpacePage(driver);
+        workingSpacePage = new WorkingSpacePage(driver);
         boardPage = new BoardPage(driver);
+        cardPage = new CardPage(driver);
         //init steps
         loginSteps = new LoginSteps(loginPage);
         atlassianLoginSteps = new AtlassianLoginSteps(atlassianLoginPage);
-        trelloWorkingSpaceSteps = new TrelloWorkingSpaceSteps(trelloWorkingSpacePage, boardPage);
-        boardSteps = new BoardSteps(boardPage);
+        workingSpaceSteps = new WorkingSpaceSteps(workingSpacePage, boardPage);
+        boardSteps = new BoardSteps(boardPage, cardPage);
     }
 
     @AfterMethod(alwaysRun = true)

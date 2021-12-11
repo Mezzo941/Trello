@@ -3,7 +3,7 @@ package steps;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import pages.AtlassianLoginPage;
-import pages.TrelloWorkingSpacePage;
+import pages.WorkingSpacePage;
 
 public class AtlassianLoginSteps {
 
@@ -17,7 +17,7 @@ public class AtlassianLoginSteps {
         WebDriver driver = atlassianLoginPage.getDriver();
         atlassianLoginPage.inputPassword(pass);
         atlassianLoginPage.clickLoginButton();
-        Assert.assertTrue(new TrelloWorkingSpacePage(driver).isOpened());
+        Assert.assertTrue(new WorkingSpacePage(driver).isOpened());
     }
 
     public void invalidLogin(String pass) {
