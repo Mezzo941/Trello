@@ -5,6 +5,7 @@ import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.testng.Assert;
+import utils.Click;
 import utils.Waiter;
 
 import java.util.List;
@@ -174,7 +175,7 @@ public class BoardPage extends BasePage {
         By cardLocator = By.xpath(String.format(CARD, listName, title));
         WebElement element = Waiter.waitVisibilityOfElement(driver, cardLocator);
         log.info("Click on the card: " + title);
-        element.click();
+        new Click(driver).byAction(element);
     }
 
 

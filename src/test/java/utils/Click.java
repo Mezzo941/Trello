@@ -16,11 +16,13 @@ public class Click {
 
     public void byAction(WebElement element) {
         Actions action = new Actions(driver);
-        action.click(element);
+        action.click(element)
+                .build()
+                .perform();
     }
 
     public void byJS(WebElement element) {
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
     }
 
