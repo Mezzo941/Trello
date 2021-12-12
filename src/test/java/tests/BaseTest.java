@@ -31,7 +31,7 @@ public class BaseTest {
     protected HomePage homePage;
     protected LoginPage loginPage;
     protected AtlassianLoginPage atlassianLoginPage;
-    protected WorkingSpacePage workingSpacePage;
+    protected WorkspacePage workspacePage;
     protected BoardPage boardPage;
     protected CardPage cardPage;
 
@@ -60,13 +60,13 @@ public class BaseTest {
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
         atlassianLoginPage = new AtlassianLoginPage(driver);
-        workingSpacePage = new WorkingSpacePage(driver);
+        workspacePage = new WorkspacePage(driver);
         boardPage = new BoardPage(driver);
         cardPage = new CardPage(driver);
         //init steps
-        loginSteps = new LoginSteps(loginPage);
-        atlassianLoginSteps = new AtlassianLoginSteps(atlassianLoginPage);
-        workingSpaceSteps = new WorkingSpaceSteps(workingSpacePage, boardPage);
+        loginSteps = new LoginSteps(loginPage, atlassianLoginPage);
+        atlassianLoginSteps = new AtlassianLoginSteps(atlassianLoginPage, workspacePage);
+        workingSpaceSteps = new WorkingSpaceSteps(workspacePage, boardPage);
         boardSteps = new BoardSteps(boardPage, cardPage);
     }
 

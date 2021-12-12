@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class AtlassianLoginPageTest extends BaseTest {
 
-    @DataProvider(name = "userData")
+    @DataProvider(name = "data")
     private Object[][] getData() {
         return new Object[][]{
                 {"12345678", "Incorrect email address and / or password.\n" +
@@ -25,8 +25,8 @@ public class AtlassianLoginPageTest extends BaseTest {
         };
     }
 
-    @Test(dataProvider = "userData")
-    @Description("Negative login test on the atlassian page")
+    @Test(dataProvider = "data")
+    @Description("Negative login test with invalid data")
     public void atlassianLoginNegativeTest(String pass, String error) {
         Assert.assertTrue
                 (

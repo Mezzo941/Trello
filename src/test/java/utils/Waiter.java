@@ -34,28 +34,10 @@ public class Waiter {
         return element;
     }
 
-    public static WebElement waitPresenceOfElementLocated(WebDriver driver, By locator) {
-        WebElement element = null;
-        try {
-            element = new WebDriverWait(driver, Duration.ofSeconds(25)).until(ExpectedConditions.presenceOfElementLocated(locator));
-        } catch (TimeoutException e) {
-            Assert.fail("Element didn't have time to be created in DOM: " + locator);
-            e.printStackTrace();
-        }
-        return element;
-    }
-
     public static WebElement waitUntilElementBeRefreshedAndClickable(WebDriver driver, By locator) {
-        WebElement element = null;
-        try {
-            element = new WebDriverWait(driver, Duration.ofSeconds(25))
-                    .ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(locator)));
-        } catch (TimeoutException e) {
-            Assert.fail("Element didn't have time to be created in DOM: " + locator);
-            e.printStackTrace();
-        }
-        return element;
+        return new WebDriverWait(driver, Duration.ofSeconds(30))
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(locator)));
     }
 
 }

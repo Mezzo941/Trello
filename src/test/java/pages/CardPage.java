@@ -27,33 +27,34 @@ public class CardPage extends BasePage {
     public boolean isOpened(String title) {
         By titleLocator = By.xpath(String.format(TITLE, title));
         WebElement element = Waiter.waitVisibilityOfElement(driver, titleLocator);
-        log.info("CardPage named " + title + " is opened. Title's loading status: " + element.isDisplayed());
+        log.info("Card page named " + title + " is opened. Title's loading status: " + element.isDisplayed());
         return element.isDisplayed();
     }
 
     @Step("Click on the button 'Archiving'")
     public void clickArchiving() {
-        WebElement element = Waiter.waitVisibilityOfElement(driver, ARCHIVING_CARD);
         log.info("Click on the button 'Archiving'");
+        WebElement element = Waiter.waitElementToBeClickable(driver, ARCHIVING_CARD);
         element.click();
     }
 
     @Step("Click on the button 'Delete card'")
     public void clickDeleteCard() {
-        WebElement element = Waiter.waitVisibilityOfElement(driver, DELETE_CARD);
         log.info("Click on the button 'Delete card'");
+        WebElement element = Waiter.waitElementToBeClickable(driver, DELETE_CARD);
         element.click();
     }
 
     @Step("Click on the button 'Confirm deletion'")
     public void confirmDeletionOfTheCard() {
-        WebElement element = Waiter.waitVisibilityOfElement(driver, CONFIRM_DELETION_OF_THE_CARD);
         log.info("Click on the button 'Confirm deletion'");
+        WebElement element = Waiter.waitElementToBeClickable(driver, CONFIRM_DELETION_OF_THE_CARD);
         element.click();
     }
 
     @Step("Input random comment: {text}")
     public void inputComment(String text) {
+        log.info("Input random comment: " + text);
         CardOptions comment = CardOptions.builder()
                 .setDriver(driver)
                 .setComment(text)
@@ -63,6 +64,7 @@ public class CardPage extends BasePage {
 
     @Step("Input random description: {text}")
     public void inputDescription(String text) {
+        log.info("Input random description: " + text);
         CardOptions cardOptions = CardOptions.builder()
                 .setDriver(driver)
                 .setDescription(text)
@@ -72,7 +74,7 @@ public class CardPage extends BasePage {
 
     public void deleteComment(String comment) {
         By deleteCommentLocator = By.xpath(String.format(DELETE_COMMENT, comment));
-        WebElement element = Waiter.waitVisibilityOfElement(driver, deleteCommentLocator);
+        WebElement element = Waiter.waitElementToBeClickable(driver, deleteCommentLocator);
         element.click();
     }
 
@@ -89,7 +91,7 @@ public class CardPage extends BasePage {
         log.info("Get comment from cardPage");
         By deleteCommentLocator = By.xpath(String.format(DELETE_COMMENT, comment));
         By commentLocator = By.xpath(String.format(COMMENT, comment));
-        WebElement element = Waiter.waitPresenceOfElementLocated(driver, commentLocator);
+        WebElement element = Waiter.waitUntilElementBeRefreshedAndClickable(driver, commentLocator);
         Waiter.waitVisibilityOfElement(driver, deleteCommentLocator);
         log.info(element.getText());
         return element.getText();

@@ -9,7 +9,7 @@ import pages.BoardPage.accessLvl;
 import static pages.BoardPage.accessLvl.*;
 
 
-public class WorkingSpacePageTest extends BaseTest {
+public class WorkspacePageTest extends BaseTest {
 
     @DataProvider(name = "forCreating")
     public Object[][] getData1() {
@@ -45,8 +45,8 @@ public class WorkingSpacePageTest extends BaseTest {
         atlassianLoginSteps.validLogin(pass);
         workingSpaceSteps.createBoard(boardName, lvl);
         Assert.assertEquals(boardPage.getAccessLvl(), expLvl);
-        workingSpacePage.open();
-        Assert.assertTrue(workingSpacePage.isBoardExists(boardName));
+        workspacePage.open();
+        Assert.assertTrue(workspacePage.isBoardExists(boardName));
     }
 
     @Test(dataProvider = "forDeletion", priority = 2)
@@ -62,25 +62,7 @@ public class WorkingSpacePageTest extends BaseTest {
         loginSteps.positiveAuthorization(email, pass);
         atlassianLoginSteps.validLogin(pass);
         workingSpaceSteps.deleteBoard(boardName);
-        Assert.assertFalse(workingSpacePage.isBoardExists(boardName));
-    }
-
-    @Test(enabled = false)
-    public void boardCreationIsSuccessful1() {
-        Assert.assertTrue(
-                homePage
-                        .open()
-                        .isOpened()
-        );
-        homePage.clickToLoginLink();
-        Assert.assertTrue(loginPage.isOpened());
-        loginSteps.positiveAuthorization(EMAIL, PASS);
-        atlassianLoginSteps.validLogin(PASS);
-        workingSpaceSteps.createBoard("board", PUBLIC);
-        Assert.assertEquals(boardPage.getAccessLvl(), "Публичная");
-        workingSpacePage.open();
-        workingSpaceSteps.deleteBoard("board");
-        Assert.assertFalse(workingSpacePage.isBoardExists("board"));
+        Assert.assertFalse(workspacePage.isBoardExists(boardName));
     }
 
 }

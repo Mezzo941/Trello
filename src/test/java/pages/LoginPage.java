@@ -53,17 +53,17 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Submit login")
-    public void clickLoginButtonPositive() {
+    public void clickLoginViaAtlassian() {
         log.info("click to login button");
-        WebElement element = Waiter.waitVisibilityOfElement(driver, SUBMIT_BUTTON);
+        WebElement element = Waiter.waitElementToBeClickable(driver, SUBMIT_BUTTON);
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.invisibilityOfElementLocated(INPUT_PASS));
         element.click();
     }
 
     @Step("Submit login")
-    public void clickLoginButtonNegative() {
+    public void clickLoginButton() {
         log.info("click to login button");
-        WebElement element = Waiter.waitVisibilityOfElement(driver, SUBMIT_BUTTON);
+        WebElement element = Waiter.waitElementToBeClickable(driver, SUBMIT_BUTTON);
         element.click();
     }
 

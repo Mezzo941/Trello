@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class CardPageTest extends BaseTest{
 
-    @Test(invocationCount = 4)
+    @Test()
     @Description("Verification of addition a description and comment to the card ")
     public void additionOfDescriptionAndCommentToTheCardIsSuccessful(){
         String board = "DoNotDelete";
@@ -22,7 +22,7 @@ public class CardPageTest extends BaseTest{
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL, PASS);
         atlassianLoginSteps.validLogin(PASS);
-        workingSpacePage.clickToTheBoard(board);
+        workspacePage.clickToTheBoard(board);
         Assert.assertTrue(boardPage.isOpened(board));
         boardSteps.addNewCard(list,card);
         boardPage.clickOnTheCard(list,card);
@@ -31,7 +31,6 @@ public class CardPageTest extends BaseTest{
         cardPage.inputComment("Мой первый коммент");
         Assert.assertEquals(cardPage.getDescription(),"Что-то произошло");
         Assert.assertEquals(cardPage.getComment("первый"),"Мой первый коммент");
-        //cardPage.clickArchiving();
     }
 
 }

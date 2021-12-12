@@ -12,17 +12,16 @@ public class AtlassianLoginPage extends BasePage {
 
     protected static final By LOGIN_BUTTON = By.id("login-submit");
     protected static final By INPUT_PASS = By.id("password");
-    protected static final By TITLE_PATH = By.xpath("//section//div[contains(text(),'Trello')]");
+    protected static final By FOOTER_ATLASSIAN_LOGO = By.cssSelector("[aria-label='Atlassian']");
     protected static final By LOGIN_ERROR = By.id("login-error");
     protected static final By PASSWORD_ERROR = By.id("password-error");
-    protected static final String TITLE = "Trello";
 
     public AtlassianLoginPage(WebDriver driver) {
         super(driver);
     }
 
     public boolean isOpened() {
-        boolean status = super.isOpened(TITLE, TITLE_PATH);
+        boolean status = super.isOpened(FOOTER_ATLASSIAN_LOGO);
         if (status) {
             log.info("Atlassian page is opened");
             return true;
@@ -45,7 +44,7 @@ public class AtlassianLoginPage extends BasePage {
     @Step("click login button")
     public void clickLoginButton() {
         log.info("click login button");
-        WebElement element = Waiter.waitVisibilityOfElement(driver, LOGIN_BUTTON);
+        WebElement element = Waiter.waitElementToBeClickable(driver, LOGIN_BUTTON);
         element.click();
     }
 }

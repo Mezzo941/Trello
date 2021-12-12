@@ -4,7 +4,6 @@ import io.qameta.allure.Step;
 import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
-import org.testng.Assert;
 import utils.Waiter;
 
 import java.util.List;
@@ -59,138 +58,110 @@ public class BoardPage extends BasePage {
     @Step("Click menu")
     public void clickMenuButton() {
         log.info("Click Menu");
-        WebElement element = Waiter.waitVisibilityOfElement(driver, MENU);
+        WebElement element = Waiter.waitElementToBeClickable(driver, MENU);
         element.click();
     }
 
     @Step("Click 'open more'")
     public void clickOpenMore() {
         log.info("Click 'open more'");
-        WebElement element = Waiter.waitVisibilityOfElement(driver, MENU_OPEN_MORE);
-        try {
-            element.click();
-        } catch (ElementClickInterceptedException e) {
-            Assert.fail("Can't click 'More' button");
-            e.printStackTrace();
-        }
+        WebElement element = Waiter.waitElementToBeClickable(driver, MENU_OPEN_MORE);
+        element.click();
     }
 
     @Step("Click 'close board'")
     public void closeBoard() {
         log.info("Click 'close board'");
-        WebElement element = Waiter.waitVisibilityOfElement(driver, CLOSE_BOARD);
-        try {
-            element.click();
-        } catch (ElementClickInterceptedException e) {
-            Assert.fail("Can't click 'close board' button");
-            e.printStackTrace();
-        }
+        WebElement element = Waiter.waitElementToBeClickable(driver, CLOSE_BOARD);
+        element.click();
     }
 
     @Step("Click 'confirm close board'")
     public void confirmClosingBoard() {
         log.info("Click 'confirm close board'");
-        WebElement element = Waiter.waitVisibilityOfElement(driver, CONFIRM_CLOSE_BOARD);
-        try {
-            element.click();
-        } catch (ElementClickInterceptedException e) {
-            Assert.fail("Can't click 'confirm closing' button");
-            e.printStackTrace();
-        }
+        WebElement element = Waiter.waitElementToBeClickable(driver, CONFIRM_CLOSE_BOARD);
+        element.click();
     }
 
     @Step("Click 'delete board'")
     public void deleteBoard() {
         log.info("Click 'delete board'");
         Waiter.waitVisibilityOfElement(driver, OPEN_BOARD_AGAIN);
-        WebElement element = Waiter.waitVisibilityOfElement(driver, DELETE_BOARD);
-        try {
-            element.click();
-        } catch (ElementClickInterceptedException e) {
-            Assert.fail("Can't click 'confirm closing' button");
-            e.printStackTrace();
-        }
+        WebElement element = Waiter.waitElementToBeClickable(driver, DELETE_BOARD);
+        element.click();
     }
 
     @Step("Confirm delete board")
     public void confirmDeleteBoard() {
         log.info("Confirm delete board");
-        WebElement element = Waiter.waitVisibilityOfElement(driver, CONFIRM_DELETE_BOARD);
-        try {
-            element.click();
-        } catch (ElementClickInterceptedException e) {
-            Assert.fail("Can't click 'confirm delete' button");
-            e.printStackTrace();
-        }
+        WebElement element = Waiter.waitElementToBeClickable(driver, CONFIRM_DELETE_BOARD);
+        element.click();
     }
 
     @Step("Click 'back to menu'")
     public void backToMenu() {
         log.info("Click 'back to menu'");
-        WebElement element = Waiter.waitVisibilityOfElement(driver, BACK_TO_MENU_ARROW);
-        try {
-            element.click();
-        } catch (ElementClickInterceptedException e) {
-            Assert.fail("Can't click 'confirm delete' button");
-            e.printStackTrace();
-        }
+        WebElement element = Waiter.waitElementToBeClickable(driver, BACK_TO_MENU_ARROW);
+        element.click();
     }
 
     @Step("Click 'Add card'")
     public void clickAddCard(String listName) {
-        By cardLocator = By.xpath(String.format(ADD_CARD_BUTTON, listName));
-        WebElement element = Waiter.waitVisibilityOfElement(driver, cardLocator);
         log.info("Click 'Add card'");
+        By cardLocator = By.xpath(String.format(ADD_CARD_BUTTON, listName));
+        WebElement element = Waiter.waitElementToBeClickable(driver, cardLocator);
         element.click();
     }
 
     @Step("Add card title")
     public void addCardTitle(String title) {
-        WebElement element = Waiter.waitVisibilityOfElement(driver, CARD_TITLE);
-        log.info("Add card title: " + title);
+        log.info("Add card title");
+        WebElement element = Waiter.waitElementToBeClickable(driver, CARD_TITLE);
+        log.info("Card title: " + title);
         element.sendKeys(title);
     }
 
     @Step("Submit add card")
     public void submitAddCard() {
-        WebElement element = Waiter.waitVisibilityOfElement(driver, SUBMIT_ADD_CARD);
         log.info("Submit add card");
+        WebElement element = Waiter.waitElementToBeClickable(driver, SUBMIT_ADD_CARD);
         element.click();
     }
 
-
     public void cancelAdditionCard() {
-        WebElement element = Waiter.waitVisibilityOfElement(driver, CANCEL_CARD_ADDITION);
+        WebElement element = Waiter.waitElementToBeClickable(driver, CANCEL_CARD_ADDITION);
         element.click();
     }
 
     @Step("Click on the card")
     public void clickOnTheCard(String listName, String title) {
+        log.info("Click on the card");
         By cardLocator = By.xpath(String.format(CARD, listName, title));
         WebElement element = Waiter.waitUntilElementBeRefreshedAndClickable(driver, cardLocator);
-        log.info("Click on the card: " + title);
+        log.info("Card: " + title);
         element.click();
     }
 
 
     @Step("Click 'Add new list'")
     public void clickToAddNewList() {
-        WebElement element = Waiter.waitVisibilityOfElement(driver, ADD_NEW_LIST);
         log.info("Click 'Add new list'");
+        WebElement element = Waiter.waitElementToBeClickable(driver, ADD_NEW_LIST);
         element.click();
     }
 
     @Step("Input list title")
     public void inputListTitle(String title) {
-        WebElement element = Waiter.waitVisibilityOfElement(driver, ADD_LIST_TITLE);
-        log.info("Input list title: " + title);
+        log.info("Input list title");
+        WebElement element = Waiter.waitElementToBeClickable(driver, ADD_LIST_TITLE);
+        log.info("List title: " + title);
         element.sendKeys(title);
     }
 
     @Step("Submit list addition")
     public void submitAddList() {
         log.info("Submit list addition");
-        WebElement element = Waiter.waitVisibilityOfElement(driver, SUBMIT_ADD_LIST);
+        WebElement element = Waiter.waitElementToBeClickable(driver, SUBMIT_ADD_LIST);
         element.click();
     }
 
@@ -198,14 +169,14 @@ public class BoardPage extends BasePage {
     public void clickListMenu(String title) {
         By menuLocator = By.xpath(String.format(MEATBALLS_MENU, title));
         log.info("Click to menu of the list named: " + title);
-        WebElement element = Waiter.waitVisibilityOfElement(driver, menuLocator);
+        WebElement element = Waiter.waitElementToBeClickable(driver, menuLocator);
         element.click();
     }
 
     @Step("Click button 'Archive List'")
     public void clickArchiveList() {
         log.info("Click button 'Archive List'");
-        WebElement element = Waiter.waitVisibilityOfElement(driver, ARCHIVE_LIST);
+        WebElement element = Waiter.waitElementToBeClickable(driver, ARCHIVE_LIST);
         element.click();
     }
 
@@ -217,6 +188,7 @@ public class BoardPage extends BasePage {
         return elements.size() > 0;
     }
 
+    @Step("Check if list exists")
     public boolean isListExists(String title) {
         By listLocator = By.xpath(String.format(LIST, title));
         List<WebElement> elements = driver.findElements(listLocator);

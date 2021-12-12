@@ -1,23 +1,23 @@
 package steps;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import pages.AtlassianLoginPage;
-import pages.WorkingSpacePage;
+import pages.WorkspacePage;
 
 public class AtlassianLoginSteps {
 
     private final AtlassianLoginPage atlassianLoginPage;
+    private final WorkspacePage workspacePage;
 
-    public AtlassianLoginSteps(AtlassianLoginPage atlassianLoginPage) {
+    public AtlassianLoginSteps(AtlassianLoginPage atlassianLoginPage, WorkspacePage workspacePage) {
         this.atlassianLoginPage = atlassianLoginPage;
+        this.workspacePage = workspacePage;
     }
 
     public void validLogin(String pass) {
-        WebDriver driver = atlassianLoginPage.getDriver();
         atlassianLoginPage.inputPassword(pass);
         atlassianLoginPage.clickLoginButton();
-        Assert.assertTrue(new WorkingSpacePage(driver).isOpened());
+        Assert.assertTrue(workspacePage.isOpened());
     }
 
     public void invalidLogin(String pass) {

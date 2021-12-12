@@ -3,7 +3,6 @@ package pages;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
-import org.testng.Assert;
 import utils.Waiter;
 
 @Log4j2
@@ -26,21 +25,17 @@ public class HomePage extends BasePage {
         }
     }
 
-    @Step("Open home trello page")
+    @Step("Open homePage")
     public HomePage open() {
-        try {
-            log.info("Open " + BASE_URL);
-            driver.get(BASE_URL);
-        } catch (WebDriverException e) {
-            Assert.fail("Can't open page by this URL " + BASE_URL);
-        }
+        log.info("Open " + BASE_URL);
+        driver.get(BASE_URL);
         return this;
     }
 
     @Step("Click to the login link")
     public void clickToLoginLink() {
         log.info("Click to the login link");
-        WebElement element = Waiter.waitVisibilityOfElement(driver, LOG_IN_BUTTON);
+        WebElement element = Waiter.waitElementToBeClickable(driver, LOG_IN_BUTTON);
         element.click();
     }
 

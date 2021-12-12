@@ -5,38 +5,38 @@ import lombok.extern.log4j.Log4j2;
 import org.testng.Assert;
 import pages.BoardPage;
 import pages.BoardPage.accessLvl;
-import pages.WorkingSpacePage;
+import pages.WorkspacePage;
 
 import static pages.BoardPage.accessLvl.*;
 
 @Log4j2
 public class WorkingSpaceSteps {
 
-    private final WorkingSpacePage workingSpacePage;
+    private final WorkspacePage workspacePage;
     private final BoardPage boardPage;
 
-    public WorkingSpaceSteps(WorkingSpacePage workingSpacePage, BoardPage boardPage) {
-        this.workingSpacePage = workingSpacePage;
+    public WorkingSpaceSteps(WorkspacePage workspacePage, BoardPage boardPage) {
+        this.workspacePage = workspacePage;
         this.boardPage = boardPage;
     }
 
     public void createBoard(String boardName, accessLvl lvl) {
-        workingSpacePage.clickTheButtonCreateBoard();
-        workingSpacePage.insertBoardsName(boardName);
+        workspacePage.clickTheButtonCreateBoard();
+        workspacePage.insertBoardsName(boardName);
         if (!lvl.equals(WORKING)) {
-            workingSpacePage.clickToChooseAccess();
-            workingSpacePage.selectAccessLvl(lvl);
+            workspacePage.clickToChooseAccess();
+            workspacePage.selectAccessLvl(lvl);
             if (lvl.equals(PUBLIC)) {
-                workingSpacePage.submitPublic();
+                workspacePage.submitPublic();
             }
         }
-        workingSpacePage.submitCreationBoard();
+        workspacePage.submitCreationBoard();
         Assert.assertTrue(boardPage.isOpened(boardName));
     }
 
     public void deleteBoard(String boardName) {
-        workingSpacePage.clickToTheBoard(boardName);
-        boardPage.isOpened(boardName);
+        workspacePage.clickToTheBoard(boardName);
+        Assert.assertTrue(boardPage.isOpened(boardName));
         String lvl = boardPage.getAccessLvl();
         boardPage.clickMenuButton();
         if (lvl.equals("Публичная")) {
@@ -47,7 +47,7 @@ public class WorkingSpaceSteps {
         boardPage.confirmClosingBoard();
         boardPage.deleteBoard();
         boardPage.confirmDeleteBoard();
-        Assert.assertTrue(workingSpacePage.isOpened());
+        Assert.assertTrue(workspacePage.isOpened());
     }
 
 }
