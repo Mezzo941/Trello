@@ -10,7 +10,6 @@ public class CardPageTest extends BaseTest{
     @Test()
     @Description("Verification of addition a description and comment to the card ")
     public void additionOfDescriptionAndCommentToTheCardIsSuccessful(){
-        String board = "DoNotDelete";
         String list = "Нужно сделать";
         String card = new Faker().artist().name();
         Assert.assertTrue(
@@ -22,8 +21,8 @@ public class CardPageTest extends BaseTest{
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL, PASS);
         atlassianLoginSteps.validLogin(PASS);
-        workspacePage.clickToTheBoard(board);
-        Assert.assertTrue(boardPage.isOpened(board));
+        workspacePage.clickToTheBoard(boardName);
+        Assert.assertTrue(boardPage.isOpened(boardName));
         boardSteps.addNewCard(list,card);
         boardPage.clickOnTheCard(list,card);
         Assert.assertTrue(cardPage.isOpened(card));

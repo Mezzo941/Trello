@@ -10,7 +10,6 @@ public class BoardPageTest extends BaseTest {
     @Test
     @Description("Check for successful creation and deletion of one card")
     public void cardCreationAndDeletionIsSuccessful() {
-        String board = "DoNotDelete";
         String list = "Нужно сделать";
         String card = new Faker().harryPotter().spell();
 
@@ -23,8 +22,8 @@ public class BoardPageTest extends BaseTest {
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL, PASS);
         atlassianLoginSteps.validLogin(PASS);
-        workspacePage.clickToTheBoard(board);
-        Assert.assertTrue(boardPage.isOpened(board));
+        workspacePage.clickToTheBoard(boardName);
+        Assert.assertTrue(boardPage.isOpened(boardName));
         boardSteps.addNewCard(list, card);
         boardSteps.deleteCard(list, card);
     }
@@ -33,7 +32,6 @@ public class BoardPageTest extends BaseTest {
     @Test
     @Description("Check for successful creation and deletion of one card in three different lists")
     public void creationAndDeletionOfOneCardInThreeDifferentListsIsSuccessful() {
-        String board = "DoNotDelete";
         String list = "Нужно сделать";
         String list2 = "В процессе";
         String list3 = "Готово";
@@ -50,8 +48,8 @@ public class BoardPageTest extends BaseTest {
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL, PASS);
         atlassianLoginSteps.validLogin(PASS);
-        workspacePage.clickToTheBoard(board);
-        Assert.assertTrue(boardPage.isOpened(board));
+        workspacePage.clickToTheBoard(boardName);
+        Assert.assertTrue(boardPage.isOpened(boardName));
         boardSteps.addNewCard(list, card);
         boardSteps.addNewCard(list2, card2);
         boardSteps.addNewCard(list3, card3);
@@ -63,7 +61,6 @@ public class BoardPageTest extends BaseTest {
     @Test
     @Description("Check for successful creation and deletion of one card in new list and then archive this list")
     public void cardAdditionAndDeletionInNewListThenArchiveListIsSuccessful() {
-        String board = "DoNotDelete";
         String list = new Faker().country().name();
         String card = new Faker().harryPotter().character();
 
@@ -76,8 +73,8 @@ public class BoardPageTest extends BaseTest {
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL, PASS);
         atlassianLoginSteps.validLogin(PASS);
-        workspacePage.clickToTheBoard(board);
-        Assert.assertTrue(boardPage.isOpened(board));
+        workspacePage.clickToTheBoard(boardName);
+        Assert.assertTrue(boardPage.isOpened(boardName));
         boardSteps.addNewList(list);
         boardSteps.addNewCard(list, card);
         boardSteps.deleteCard(list, card);
@@ -87,7 +84,6 @@ public class BoardPageTest extends BaseTest {
     @Test
     @Description("Check for successful creation and deletion of three cards in one list")
     public void creatingAndDeletionThreeCardsInOneListsSuccessfully() {
-        String board = "DoNotDelete";
         String list = "Нужно сделать";
         String card = new Faker().ancient().titan();
         String card2 = new Faker().superhero().name();
@@ -102,8 +98,8 @@ public class BoardPageTest extends BaseTest {
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL, PASS);
         atlassianLoginSteps.validLogin(PASS);
-        workspacePage.clickToTheBoard(board);
-        Assert.assertTrue(boardPage.isOpened(board));
+        workspacePage.clickToTheBoard(boardName);
+        Assert.assertTrue(boardPage.isOpened(boardName));
         boardSteps.addNewCard(list, card);
         boardSteps.addNewCard(list, card2);
         boardSteps.addNewCard(list, card3);
