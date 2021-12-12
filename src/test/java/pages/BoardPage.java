@@ -5,7 +5,6 @@ import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.*;
 import org.testng.Assert;
-import utils.Click;
 import utils.Waiter;
 
 import java.util.List;
@@ -32,9 +31,8 @@ public class BoardPage extends BasePage {
     private static final By SUBMIT_ADD_LIST = By.cssSelector(".mod-list-add-button");
     private static final String ADD_CARD_BUTTON = "//textarea[contains(text(),'%s')]/ancestor::div[contains(@class,'list js-list-content')]//span[@class='js-add-a-card']";
     private static final String LIST = "//textarea[contains(text(),'%s')]/ancestor::div[@class='list js-list-content']";
-    private static final String CARD = "//textarea[contains(text(),'%s')]/following::div[@class='list-card-details js-card-details']//*[contains(text(),'%s')]";
-    private static final String MEATBALLS_MENU = LIST + "//div[@class='list-header-extras']";
-
+    private static final String CARD = "//textarea[contains(text(),'%s')]/following::span[contains(text(),'%s')]";
+    private static final String MEATBALLS_MENU = "//textarea[contains(text(),'%s')]/ancestor::div[@class='list js-list-content']//a[contains(@class,'icon-overflow-menu-horizontal')]";
 
     public BoardPage(WebDriver driver) {
         super(driver);
@@ -52,8 +50,9 @@ public class BoardPage extends BasePage {
 
     @Step("Check access level of the board")
     public String getAccessLvl() {
+        log.info("Check access level of the board");
         WebElement element = Waiter.waitVisibilityOfElement(driver, ACCESS_LVL);
-        log.info("Access lvl of the board: " + element.getText());
+        log.info("Access lvl: " + element.getText());
         return element.getText();
     }
 
@@ -61,12 +60,7 @@ public class BoardPage extends BasePage {
     public void clickMenuButton() {
         log.info("Click Menu");
         WebElement element = Waiter.waitVisibilityOfElement(driver, MENU);
-        try {
-            element.click();
-        } catch (ElementClickInterceptedException e) {
-            Assert.fail("Can't click menu button");
-            e.printStackTrace();
-        }
+        element.click();
     }
 
     @Step("Click 'open more'")
@@ -173,9 +167,9 @@ public class BoardPage extends BasePage {
     @Step("Click on the card")
     public void clickOnTheCard(String listName, String title) {
         By cardLocator = By.xpath(String.format(CARD, listName, title));
-        WebElement element = Waiter.waitVisibilityOfElement(driver, cardLocator);
+        WebElement element = Waiter.waitUntilElementBeRefreshedAndClickable(driver, cardLocator);
         log.info("Click on the card: " + title);
-        new Click(driver).byAction(element);
+        element.click();
     }
 
 
@@ -209,7 +203,7 @@ public class BoardPage extends BasePage {
     }
 
     @Step("Click button 'Archive List'")
-    public void clickArchiveList(){
+    public void clickArchiveList() {
         log.info("Click button 'Archive List'");
         WebElement element = Waiter.waitVisibilityOfElement(driver, ARCHIVE_LIST);
         element.click();

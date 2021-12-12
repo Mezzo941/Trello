@@ -26,7 +26,7 @@ public abstract class BasePage {
         boolean status = false;
         try {
             status = isScriptComplete();
-            element = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOfElementLocated(titlePath));
+            element = new WebDriverWait(driver, Duration.ofSeconds(25)).until(ExpectedConditions.visibilityOfElementLocated(titlePath));
         } catch (Exception e) {
             Assert.fail("Time is over. Page Didn't load");
         }
@@ -38,8 +38,8 @@ public abstract class BasePage {
         WebElement element = null;
         boolean status = false;
         try {
-            element = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOfElementLocated(uniquePagesLocator));
             status = isScriptComplete();
+            element = new WebDriverWait(driver, Duration.ofSeconds(25)).until(ExpectedConditions.visibilityOfElementLocated(uniquePagesLocator));
         } catch (TimeoutException e) {
             Assert.fail("Time is over. Page Didn't load");
         }
@@ -48,7 +48,7 @@ public abstract class BasePage {
     }
 
     private boolean isScriptComplete() {
-        boolean status = new WebDriverWait(driver, Duration.ofSeconds(20))
+        boolean status = new WebDriverWait(driver, Duration.ofSeconds(25))
                 .until(webDriver -> ((JavascriptExecutor) webDriver)
                         .executeScript("return document.readyState")
                         .equals("complete"));
@@ -63,11 +63,11 @@ public abstract class BasePage {
     public String getError(By loginError, By passError) {
         WebElement element = null;
         try {
-            element = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOfElementLocated(loginError));
+            element = new WebDriverWait(driver, Duration.ofSeconds(25)).until(ExpectedConditions.visibilityOfElementLocated(loginError));
             log.info("get error after bad login. Error details: " + element.getText());
         } catch (TimeoutException e1) {
             try {
-                element = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.visibilityOfElementLocated(passError));
+                element = new WebDriverWait(driver, Duration.ofSeconds(25)).until(ExpectedConditions.visibilityOfElementLocated(passError));
                 log.info("get error after bad password. Error details: " + element.getText());
             } catch (TimeoutException e2) {
                 Assert.fail("Error didn't load on the page: " + passError);

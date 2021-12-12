@@ -1,17 +1,18 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CardPageTest extends BaseTest{
 
-    @Test
+    @Test(invocationCount = 4)
     @Description("Verification of addition a description and comment to the card ")
     public void additionOfDescriptionAndCommentToTheCardIsSuccessful(){
         String board = "DoNotDelete";
         String list = "Нужно сделать";
-        String card = "тесткарта";
+        String card = new Faker().artist().name();
         Assert.assertTrue(
                 homePage
                         .open()
@@ -30,6 +31,7 @@ public class CardPageTest extends BaseTest{
         cardPage.inputComment("Мой первый коммент");
         Assert.assertEquals(cardPage.getDescription(),"Что-то произошло");
         Assert.assertEquals(cardPage.getComment("первый"),"Мой первый коммент");
+        //cardPage.clickArchiving();
     }
 
 }

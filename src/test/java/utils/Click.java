@@ -15,8 +15,7 @@ public class Click {
     }
 
     public void byAction(WebElement element) {
-        Actions action = new Actions(driver);
-        action.click(element)
+        new Actions(driver).click(element)
                 .build()
                 .perform();
     }
