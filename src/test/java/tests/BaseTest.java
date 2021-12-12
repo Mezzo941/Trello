@@ -24,8 +24,8 @@ public class BaseTest {
     private WebDriver driver;
 
     protected static final String PASS = PropertyReader.getProperty("trello.pass");
-    protected static String EMAIL;
-    protected static String boardName;
+    protected String EMAIL;
+    protected String boardName;
 
     protected HomePage homePage;
     protected LoginPage loginPage;
@@ -67,7 +67,7 @@ public class BaseTest {
             e.printStackTrace();
         }
         setAccountData(id);
-        BaseTest.boardName = boardName;
+        this.boardName = boardName;
         context.setAttribute("driver", driver);
         //init pages
         homePage = new HomePage(driver);

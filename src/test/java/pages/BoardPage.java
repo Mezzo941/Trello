@@ -169,7 +169,7 @@ public class BoardPage extends BasePage {
     public void clickListMenu(String title) {
         By menuLocator = By.xpath(String.format(MEATBALLS_MENU, title));
         log.info("Click to menu of the list named: " + title);
-        WebElement element = Waiter.waitElementToBeClickable(driver, menuLocator);
+        WebElement element = Waiter.waitUntilElementBeRefreshedAndClickable(driver, menuLocator);
         element.click();
     }
 
