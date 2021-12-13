@@ -139,7 +139,12 @@ public class BoardPage extends BasePage {
         By cardLocator = By.xpath(String.format(CARD, listName, title));
         WebElement element = Waiter.waitUntilElementBeRefreshedAndClickable(driver, cardLocator);
         log.info("Card: " + title);
-        element.click();
+        try {
+            element.click();
+        }
+        catch (StaleElementReferenceException e){
+            element.click();
+        }
     }
 
 
