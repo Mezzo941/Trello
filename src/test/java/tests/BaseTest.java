@@ -53,12 +53,16 @@ public class BaseTest {
         }
     }
 
-    @Parameters({"browser", "boardName", "accountId"})
+    @Parameters({"accountId", "boardName"})
+    @BeforeSuite
+    public void setUpLogin(String id, String boardName) {
+        setAccountData(id);
+        this.boardName = boardName;
+    }
+
+    @Parameters({"browser"})
     @BeforeMethod
-    public void setUp(@Optional("chrome") String browser,
-                      @Optional("DoNotDelete") String boardName,
-                      @Optional("1") String id,
-                      ITestContext context) {
+    public void setUp(@Optional("chrome") String browser, ITestContext context) {
         try {
             driver = WebDriverFactory.gerDriver(browser, "--headless", "--lang=en");
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -66,8 +70,6 @@ public class BaseTest {
             Assert.fail("driver assert was failed. Details: " + driver);
             e.printStackTrace();
         }
-        setAccountData(id);
-        this.boardName = boardName;
         context.setAttribute("driver", driver);
         //init pages
         homePage = new HomePage(driver);
