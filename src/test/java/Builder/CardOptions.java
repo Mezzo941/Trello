@@ -23,7 +23,7 @@ public class CardOptions {
 
     public void addDescription() {
         WebElement desc = Waiter.waitElementToBeClickable(setDriver,DESCRIPTION_TEXTAREA);
-        new Click(setDriver).byAction(desc);
+        new Click(setDriver).byJS(desc);
         desc.sendKeys(setDescription);
         WebElement saveButton = Waiter.waitElementToBeClickable(setDriver, SAVE_DESCRIPTION);
         saveButton.click();

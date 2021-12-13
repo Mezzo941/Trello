@@ -137,14 +137,10 @@ public class BoardPage extends BasePage {
     public void clickOnTheCard(String listName, String title) {
         log.info("Click on the card");
         By cardLocator = By.xpath(String.format(CARD, listName, title));
-        WebElement element = Waiter.waitUntilElementBeRefreshedAndClickable(driver, cardLocator);
+        Waiter.waitUntilElementBeRefreshedAndClickable(driver, cardLocator);
+        WebElement element = driver.findElement(cardLocator);
         log.info("Card: " + title);
-        try {
-            element.click();
-        }
-        catch (StaleElementReferenceException e){
-            element.click();
-        }
+        element.click();
     }
 
 
@@ -188,6 +184,7 @@ public class BoardPage extends BasePage {
     @Step("Check if card exists")
     public boolean isCardExists(String listName, String title) {
         By cardLocator = By.xpath(String.format(CARD, listName, title));
+        Waiter.waitUntilElementBeRefreshedAndClickable(driver,cardLocator);
         List<WebElement> elements = driver.findElements(cardLocator);
         log.info("Number of cards named: " + title + " found in list named: " + listName + " is: " + elements.size());
         return elements.size() > 0;
@@ -196,6 +193,7 @@ public class BoardPage extends BasePage {
     @Step("Check if list exists")
     public boolean isListExists(String title) {
         By listLocator = By.xpath(String.format(LIST, title));
+        Waiter.waitUntilElementBeRefreshedAndClickable(driver,listLocator);
         List<WebElement> elements = driver.findElements(listLocator);
         log.info("Number of lists named: " + title + " is: " + elements.size());
         return elements.size() > 0;
