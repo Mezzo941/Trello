@@ -14,15 +14,23 @@ public class AtlassianLoginSteps {
         this.workspacePage = workspacePage;
     }
 
-    public void validLogin(String pass) {
-        atlassianLoginPage.inputPassword(pass);
+    public void loginViaEmail(String pass) {
+        atlassianLoginPage.enterPassword(pass);
         atlassianLoginPage.clickLoginButton();
         Assert.assertTrue(workspacePage.isOpened());
     }
 
     public void invalidLogin(String pass) {
-        atlassianLoginPage.inputPassword(pass);
+        atlassianLoginPage.enterPassword(pass);
         atlassianLoginPage.clickLoginButton();
+    }
+
+    public void loginViaUsername(String email, String pass) {
+        atlassianLoginPage.enterEmail(email);
+        atlassianLoginPage.clickLoginButton();
+        atlassianLoginPage.enterPassword(pass);
+        atlassianLoginPage.clickLoginButton();
+        Assert.assertTrue(workspacePage.isOpened());
     }
 
 

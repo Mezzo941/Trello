@@ -12,6 +12,7 @@ public class AtlassianLoginPage extends BasePage {
 
     protected static final By LOGIN_BUTTON = By.id("login-submit");
     protected static final By INPUT_PASS = By.id("password");
+    protected static final By INPUT_EMAIL = By.id("username");
     protected static final By FOOTER_ATLASSIAN_LOGO = By.cssSelector("[aria-label='Atlassian']");
     protected static final By LOGIN_ERROR = By.id("login-error");
     protected static final By PASSWORD_ERROR = By.id("password-error");
@@ -34,8 +35,8 @@ public class AtlassianLoginPage extends BasePage {
         return super.getError(LOGIN_ERROR, PASSWORD_ERROR);
     }
 
-    @Step("Input password")
-    public void inputPassword(String pass) {
+    @Step("Enter password")
+    public void enterPassword(String pass) {
         log.info("Enter atlassian password: " + pass);
         WebElement element = Waiter.waitVisibilityOfElement(driver, INPUT_PASS);
         element.sendKeys(pass);
@@ -47,4 +48,12 @@ public class AtlassianLoginPage extends BasePage {
         WebElement element = Waiter.waitElementToBeClickable(driver, LOGIN_BUTTON);
         element.click();
     }
+
+    @Step("Enter email")
+    public void enterEmail(String email) {
+        log.info("Enter email: " + email);
+        WebElement element = Waiter.waitElementToBeClickable(driver, INPUT_EMAIL);
+        element.sendKeys(email);
+    }
+
 }

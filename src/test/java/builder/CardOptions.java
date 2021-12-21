@@ -1,4 +1,4 @@
-package Builder;
+package builder;
 
 import lombok.Builder;
 import org.openqa.selenium.By;

@@ -11,16 +11,14 @@ public class LoginPageTest extends BaseTest {
     public Object[][] getData() {
         return new Object[][]
                 {
-                        {"email@gmail.com", "eeeeeeee", "Указан неверный адрес и/или пароль. Нужна помощь?"},
-                        {"", "", "Отсутствует адрес электронной почты"},
-                        {"fdf", "", "Аккаунта с таким именем пользователя не существует"},
-                        {"gmail @gmail.com", "", "Аккаунт с таким адресом электронной почты не существует"},
-                        {"Александр", "", "Аккаунта с таким именем пользователя не существует"},
-                        {"fdfdffdffdfdffdffdfdffdffdfdffdffdfdffdffdfdffdffdfdffdffdfdffdffdfdffd" +
-                                "ffdfdffdffdfdffdffdfdffdffdfdffdffdfdffdffdfdffdffdfdffdffdfdffd" +
-                                "ffdfdffdffdfdffdffdfdffdffdfdffdf@gmail.com", " ",
-                                "Аккаунт с таким адресом электронной почты не существует"},
-                        {" fdfdff@kek.com", "", "Аккаунт с таким адресом электронной почты не существует"},
+                        {"gmail@gmail.com", "", "Указан неверный адрес и/или пароль. Нужна помощь?"},
+                        {"", PASS, "Отсутствует адрес электронной почты"},
+                        {"asking12345@mail.ru", PASS, "Аккаунт с таким адресом электронной почты не существует"},
+                        {"Mezzo9412", PASS, "Аккаунта с таким именем пользователя не существует"},
+                        {"!@#$%^&*()_+=-", PASS, "Аккаунт с таким адресом электронной почты не существует"},
+                        {"анатолий@почта.рф", PASS, "Аккаунт с таким адресом электронной почты не существует"},
+                        {"анатолий1234", PASS, "Аккаунта с таким именем пользователя не существует"},
+                        {"gmail@gmail.com", PASS, "Указан неверный адрес и/или пароль. Нужна помощь?"},
                 };
     }
 
@@ -40,7 +38,7 @@ public class LoginPageTest extends BaseTest {
 
     @Test(priority = 2)
     @Description("Positive login test with using valid data")
-    public void positiveLoginTest() {
+    public void positiveLoginTestViaEmail() {
         Assert.assertTrue(
                 homePage
                         .open()
@@ -49,7 +47,21 @@ public class LoginPageTest extends BaseTest {
         homePage.clickToLoginLink();
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL, PASS);
-        atlassianLoginSteps.validLogin(PASS);
+        atlassianLoginSteps.loginViaEmail(PASS);
+    }
+
+    @Test(priority = 3)
+    @Description("Positive login test with using valid data")
+    public void positiveLoginTestViaUsername() {
+        Assert.assertTrue(
+                homePage
+                        .open()
+                        .isOpened()
+        );
+        homePage.clickToLoginLink();
+        Assert.assertTrue(loginPage.isOpened());
+        loginSteps.positiveAuthorization(USERNAME, PASS);
+        atlassianLoginSteps.loginViaUsername(EMAIL, PASS);
     }
 
 }

@@ -24,6 +24,7 @@ public class BaseTest {
     private WebDriver driver;
 
     protected static final String PASS = PropertyReader.getProperty("trello.pass");
+    protected static final String USERNAME = PropertyReader.getProperty("trello.username");
     protected String EMAIL;
     protected String boardName;
 

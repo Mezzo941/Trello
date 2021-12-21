@@ -21,8 +21,8 @@ public class LoginSteps {
         loginPage.clickLoginButton();
     }
 
-    public void positiveAuthorization(String email, String pass) {
-        loginPage.inputLogin(email);
+    public void positiveAuthorization(String emailOrUsername, String pass) {
+        loginPage.inputLogin(emailOrUsername);
         loginPage.inputPassword(pass);
         loginPage.clickLoginButton();
         Assert.assertTrue(atlassianLoginPage.isOpened());

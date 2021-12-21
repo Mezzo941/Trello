@@ -50,4 +50,11 @@ public class WorkingSpaceSteps {
         Assert.assertTrue(workspacePage.isOpened());
     }
 
+    /*public void createBoard2(String boardName) {
+        workspacePage.clickTheButtonCreateBoard();
+        workspacePage.insertBoardsName(boardName);
+        workspacePage.submitCreationBoard();
+        Assert.assertTrue(boardPage.isOpened(boardName));
+    }*/
+
 }

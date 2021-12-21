@@ -21,7 +21,7 @@ public class BoardPageTest extends BaseTest {
         homePage.clickToLoginLink();
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL, PASS);
-        atlassianLoginSteps.validLogin(PASS);
+        atlassianLoginSteps.loginViaEmail(PASS);
         workspacePage.clickToTheBoard(boardName);
         Assert.assertTrue(boardPage.isOpened(boardName));
         boardSteps.addNewCard(list, card);
@@ -47,7 +47,7 @@ public class BoardPageTest extends BaseTest {
         homePage.clickToLoginLink();
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL, PASS);
-        atlassianLoginSteps.validLogin(PASS);
+        atlassianLoginSteps.loginViaEmail(PASS);
         workspacePage.clickToTheBoard(boardName);
         Assert.assertTrue(boardPage.isOpened(boardName));
         boardSteps.addNewCard(list, card);
@@ -72,7 +72,7 @@ public class BoardPageTest extends BaseTest {
         homePage.clickToLoginLink();
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL, PASS);
-        atlassianLoginSteps.validLogin(PASS);
+        atlassianLoginSteps.loginViaEmail(PASS);
         workspacePage.clickToTheBoard(boardName);
         Assert.assertTrue(boardPage.isOpened(boardName));
         boardSteps.addNewList(list);
@@ -97,7 +97,7 @@ public class BoardPageTest extends BaseTest {
         homePage.clickToLoginLink();
         Assert.assertTrue(loginPage.isOpened());
         loginSteps.positiveAuthorization(EMAIL, PASS);
-        atlassianLoginSteps.validLogin(PASS);
+        atlassianLoginSteps.loginViaEmail(PASS);
         workspacePage.clickToTheBoard(boardName);
         Assert.assertTrue(boardPage.isOpened(boardName));
         boardSteps.addNewCard(list, card);
