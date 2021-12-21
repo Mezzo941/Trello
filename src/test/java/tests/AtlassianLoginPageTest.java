@@ -11,17 +11,11 @@ public class AtlassianLoginPageTest extends BaseTest {
     @DataProvider(name = "data")
     private Object[][] getData() {
         return new Object[][]{
-                {"12345678", "Incorrect email address and / or password.\n" +
+                {"", "Enter your password"},
+                {PASS + "q", "Incorrect email address and / or password.\n" +
                         "Do you need help logging in?"},
-                {"12", "Incorrect email address and / or password.\n" +
+                {"пароль123", "Incorrect email address and / or password.\n" +
                         "Do you need help logging in?"},
-                {"nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn" +
-                        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" +
-                        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "Incorrect email address and / or password.\n" +
-                        "Do you need help logging in?"},
-                {"1 2", "Incorrect email address and / or password.\n" +
-                        "Do you need help logging in?"},
-                {"", "Enter your password"}
         };
     }
 
@@ -36,9 +30,24 @@ public class AtlassianLoginPageTest extends BaseTest {
                 );
         homePage.clickToLoginLink();
         Assert.assertTrue(loginPage.isOpened());
-        loginSteps.positiveAuthorization(EMAIL, PASS);
+        loginSteps.positiveAuthorization(email, PASS);
         atlassianLoginSteps.invalidLogin(pass);
         Assert.assertEquals(atlassianLoginPage.getError(), error);
+    }
+
+    @Test
+    @Description("Positive login test with valid data")
+    public void atlassianLoginPositiveTest() {
+        Assert.assertTrue
+                (
+                        homePage
+                                .open()
+                                .isOpened()
+                );
+        homePage.clickToLoginLink();
+        Assert.assertTrue(loginPage.isOpened());
+        loginSteps.positiveAuthorization(email, PASS);
+        atlassianLoginSteps.loginViaEmail(PASS);
     }
 
 }

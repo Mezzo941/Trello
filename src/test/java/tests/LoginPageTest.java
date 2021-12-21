@@ -5,10 +5,11 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+
 public class LoginPageTest extends BaseTest {
 
-    @DataProvider(name = "userData")
-    public Object[][] getData() {
+    @DataProvider(name = "userData1")
+    public Object[][] getData1() {
         return new Object[][]
                 {
                         {"gmail@gmail.com", "", "Указан неверный адрес и/или пароль. Нужна помощь?"},
@@ -22,8 +23,17 @@ public class LoginPageTest extends BaseTest {
                 };
     }
 
-    @Test(dataProvider = "userData", priority = 1)
-    @Description("Negative login test with using invalid data")
+    @DataProvider(name = "userData2")
+    public Object[][] getData2() {
+        return new Object[][]
+                {
+                        {email, PASS},
+                        {USERNAME, PASS}
+                };
+    }
+
+    @Test(dataProvider = "userData1", priority = 1)
+    @Description("Negative login test using invalid data")
     public void negativeLoginTest(String email, String password, String error) {
         Assert.assertTrue(
                 homePage
@@ -36,9 +46,9 @@ public class LoginPageTest extends BaseTest {
         Assert.assertEquals(loginPage.getError(), error);
     }
 
-    @Test(priority = 2)
-    @Description("Positive login test with using valid data")
-    public void positiveLoginTestViaEmail() {
+    @Test(dataProvider = "userData2", priority = 2)
+    @Description("Positive login test using valid data")
+    public void positiveLoginTestViaEmail(String emailOrUsername, String pass) {
         Assert.assertTrue(
                 homePage
                         .open()
@@ -46,22 +56,7 @@ public class LoginPageTest extends BaseTest {
         );
         homePage.clickToLoginLink();
         Assert.assertTrue(loginPage.isOpened());
-        loginSteps.positiveAuthorization(EMAIL, PASS);
-        atlassianLoginSteps.loginViaEmail(PASS);
-    }
-
-    @Test(priority = 3)
-    @Description("Positive login test with using valid data")
-    public void positiveLoginTestViaUsername() {
-        Assert.assertTrue(
-                homePage
-                        .open()
-                        .isOpened()
-        );
-        homePage.clickToLoginLink();
-        Assert.assertTrue(loginPage.isOpened());
-        loginSteps.positiveAuthorization(USERNAME, PASS);
-        atlassianLoginSteps.loginViaUsername(EMAIL, PASS);
+        loginSteps.positiveAuthorization(emailOrUsername, pass);
     }
 
 }

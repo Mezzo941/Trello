@@ -36,7 +36,7 @@ public class WorkspacePageTest extends BaseTest {
         );
         homePage.clickToLoginLink();
         Assert.assertTrue(loginPage.isOpened());
-        loginSteps.positiveAuthorization(EMAIL, PASS);
+        loginSteps.positiveAuthorization(email, PASS);
         atlassianLoginSteps.loginViaEmail(PASS);
         workingSpaceSteps.deleteBoard(boardName);
         Assert.assertFalse(workspacePage.isBoardExists(boardName));

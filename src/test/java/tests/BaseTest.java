@@ -1,5 +1,6 @@
 package tests;
 
+import factory.AccountFactory;
 import steps.BoardSteps;
 import steps.WorkingSpaceSteps;
 import factory.WebDriverFactory;
@@ -25,7 +26,7 @@ public class BaseTest {
 
     protected static final String PASS = PropertyReader.getProperty("trello.pass");
     protected static final String USERNAME = PropertyReader.getProperty("trello.username");
-    protected String EMAIL;
+    protected String email;
     protected String boardName;
 
     protected HomePage homePage;
@@ -40,32 +41,17 @@ public class BaseTest {
     protected WorkingSpaceSteps workingSpaceSteps;
     protected BoardSteps boardSteps;
 
-
-    private void setAccountData(String id) {
-        switch (id) {
-            case "1": {
-                EMAIL = PropertyReader.getProperty("trello.email1");
-                break;
-            }
-            case "2": {
-                EMAIL = PropertyReader.getProperty("trello.email2");
-                break;
-            }
-        }
-    }
-
     @Parameters({"accountId", "boardName"})
-    @BeforeTest
-    public void setUpLogin(@Optional("1") String id, @Optional("DoNotDelete") String boardName) {
-
+    @BeforeClass
+    public void setAccount(@Optional("1") String id, @Optional("DoNotDelete") String boardName) {
+        email = AccountFactory.getAccount(id);
+        this.boardName = boardName;
     }
 
-    @Parameters({"browser", "accountId", "boardName"})
+
+    @Parameters({"browser"})
     @BeforeMethod
-    public void setUp(@Optional("chrome") String browser,
-                      @Optional("1") String id,
-                      @Optional("DoNotDelete") String boardName,
-                      ITestContext context) {
+    public void setUp(@Optional("chrome") String browser, ITestContext context) {
         try {
             driver = WebDriverFactory.gerDriver(browser, "--headless", "--lang=en");
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
@@ -74,8 +60,6 @@ public class BaseTest {
             e.printStackTrace();
         }
         context.setAttribute("driver", driver);
-        setAccountData(id);
-        this.boardName = boardName;
         //init pages
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
