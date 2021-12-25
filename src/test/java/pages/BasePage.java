@@ -9,7 +9,6 @@ import org.testng.Assert;
 import java.time.Duration;
 
 
-
 @Log4j2
 public abstract class BasePage {
 
@@ -30,7 +29,7 @@ public abstract class BasePage {
         } catch (Exception e) {
             Assert.fail("Time is over. Page Didn't load");
         }
-        log.info("Title of the page was loaded: " + element.getText() + ". Script's status is " + status);
+        log.info("Title of the page isDisplayed = " + element.isDisplayed() + ". Script's status is " + status);
         return element.getText().equals(title) && status;
     }
 
@@ -43,7 +42,7 @@ public abstract class BasePage {
         } catch (TimeoutException e) {
             Assert.fail("Time is over. Page Didn't load");
         }
-        log.info("Unique page's element is loaded. Script's status is " + status);
+        log.info("Unique page's element isDisplayed = " + element.isDisplayed() + ". Script's status is " + status);
         return element.isDisplayed() && status;
     }
 

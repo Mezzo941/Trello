@@ -198,12 +198,10 @@ public class BoardPage extends BasePage {
     }
 
     @ToString
-    public enum accessLvl {
-
+    public enum AccessLvl {
         PUBLIC,
         PRIVATE,
         WORKING
-
     }
 
 }

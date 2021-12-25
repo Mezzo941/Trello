@@ -4,7 +4,6 @@ import factory.AccountFactory;
 import steps.BoardSteps;
 import steps.WorkingSpaceSteps;
 import factory.WebDriverFactory;
-import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestContext;
@@ -18,7 +17,6 @@ import utils.TestListener;
 import java.time.Duration;
 
 
-@Log4j2
 @Listeners(TestListener.class)
 public class BaseTest {
 
@@ -47,7 +45,6 @@ public class BaseTest {
         email = AccountFactory.getAccount(id);
         this.boardName = boardName;
     }
-
 
     @Parameters({"browser"})
     @BeforeMethod

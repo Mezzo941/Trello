@@ -48,7 +48,7 @@ public class LoginPageTest extends BaseTest {
 
     @Test(dataProvider = "userData2", priority = 2)
     @Description("Positive login test using valid data")
-    public void positiveLoginTestViaEmail(String emailOrUsername, String pass) {
+    public void positiveLoginTest(String emailOrUsername, String pass) {
         Assert.assertTrue(
                 homePage
                         .open()

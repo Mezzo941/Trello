@@ -4,10 +4,10 @@ import lombok.extern.log4j.Log4j2;
 
 import org.testng.Assert;
 import pages.BoardPage;
-import pages.BoardPage.accessLvl;
+import pages.BoardPage.AccessLvl;
 import pages.WorkspacePage;
 
-import static pages.BoardPage.accessLvl.*;
+import static pages.BoardPage.AccessLvl.*;
 
 @Log4j2
 public class WorkingSpaceSteps {
@@ -20,7 +20,7 @@ public class WorkingSpaceSteps {
         this.boardPage = boardPage;
     }
 
-    public void createBoard(String boardName, accessLvl lvl) {
+    public void createBoard(String boardName, AccessLvl lvl) {
         workspacePage.clickTheButtonCreateBoard();
         workspacePage.insertBoardsName(boardName);
         if (!lvl.equals(WORKING)) {
@@ -38,9 +38,15 @@ public class WorkingSpaceSteps {
         workspacePage.clickToTheBoard(boardName);
         Assert.assertTrue(boardPage.isOpened(boardName));
         String lvl = boardPage.getAccessLvl();
-        boardPage.clickMenuButton();
         if (lvl.equals("Публичная")) {
-            boardPage.backToMenu();
+            try {
+                boardPage.clickMenuButton();
+                boardPage.backToMenu();
+            } catch (AssertionError e) {
+                boardPage.backToMenu();
+            }
+        } else {
+            boardPage.clickMenuButton();
         }
         boardPage.clickOpenMore();
         boardPage.closeBoard();
@@ -48,13 +54,7 @@ public class WorkingSpaceSteps {
         boardPage.deleteBoard();
         boardPage.confirmDeleteBoard();
         Assert.assertTrue(workspacePage.isOpened());
+        Assert.assertFalse(workspacePage.isBoardExists(boardName));
     }
-
-    /*public void createBoard2(String boardName) {
-        workspacePage.clickTheButtonCreateBoard();
-        workspacePage.insertBoardsName(boardName);
-        workspacePage.submitCreationBoard();
-        Assert.assertTrue(boardPage.isOpened(boardName));
-    }*/
 
 }
