@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Functional tests">
+
+    <listeners>
+        <listener class-name="utils.TestListener"/>
+        <listener class-name="utils.AnnotationTransformer"/>
+    </listeners>
+
+    <test name="Functional suite for Chrome">
+        <parameter name="accountId" value="1"/>
+        <parameter name="browser" value="chrome"/>
+        <parameter name="boardName" value="DoNotDelete"/>
+        <classes>
+            <class name="tests.LoginPageTest"/>
+            <class name="tests.AtlassianLoginPageTest"/>
+            <class name="tests.WorkspacePageTest"/>
+            <class name="tests.BoardPageTest"/>
+            <class name="tests.CardPageTest"/>
+        </classes>
+    </test>
+
+</suite>
